@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州泽亨实业有限公司 - 数字化管理平台</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #333; }
+        
+        :root { --primary: #0089FF; --primary-light: #e6f4ff; --success: #52c41a; --warning: #faad14; --danger: #ff4d4f; --gray-1: #fafafa; --gray-2: #f0f0f0; --gray-3: #d9d9d9; --gray-4: #bfbfbf; --gray-5: #8c8c8c; --gray-6: #595959; --gray-7: #262626; }
+        
+        .app-container { display: flex; height: 100vh; overflow: hidden; }
+        .sidebar { width: 220px; background: #fff; border-right: 1px solid var(--gray-3); display: flex; flex-direction: column; z-index: 10; }
+        .sidebar-header { padding: 20px; border-bottom: 1px solid var(--gray-3); text-align: center; }
+        .sidebar-header h2 { font-size: 16px; color: var(--primary); margin-bottom: 5px; }
+        .sidebar-header p { font-size: 12px; color: var(--gray-5); }
+        .nav-menu { flex: 1; overflow-y: auto; padding: 10px 0; }
+        .nav-item { padding: 12px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; border-left: 3px solid transparent; }
+        .nav-item:hover { background: var(--gray-1); }
+        .nav-item.active { background: var(--primary-light); border-left-color: var(--primary); color: var(--primary); }
+        .nav-icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+        
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .header { height: 60px; background: #fff; border-bottom: 1px solid var(--gray-3); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .header-title { font-size: 18px; font-weight: 600; }
+        .header-user { display: flex; align-items: center; gap: 10px; }
+        .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        
+        .content-area { flex: 1; overflow-y: auto; padding: 24px; }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+        
+        .card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+        
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .kpi-card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid var(--primary); }
+        .kpi-label { font-size: 13px; color: var(--gray-5); margin-bottom: 8px; }
+        .kpi-value { font-size: 28px; font-weight: 600; color: var(--gray-7); }
+        .kpi-trend { font-size: 12px; margin-top: 8px; }
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+        
+        .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .action-btn { background: #fff; border: 1px solid var(--gray-3); border-radius: 8px; padding: 16px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .action-btn:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,137,255,0.15); transform: translateY(-2px); }
+        .action-icon { font-size: 24px; margin-bottom: 8px; }
+        .action-text { font-size: 14px; color: var(--gray-6); }
+        
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { background: var(--gray-1); padding: 12px; text-align: left; font-weight: 600; font-size: 13px; color: var(--gray-6); border-bottom: 2px solid var(--gray-3); cursor: pointer; user-select: none; }
+        .data-table th:hover { background: var(--gray-2); }
+        .data-table td { padding: 12px; border-bottom: 1px solid var(--gray-2); font-size: 13px; }
+        .data-table tr:hover { background: var(--gray-1); }
+        .data-table tr.warning-row { background: #fff2f0; }
+        .data-table tr.warning-row:hover { background: #ffe4e0; }
+        
+        .btn { padding: 8px 16px; border-radius: 4px; border: none; cursor: pointer; font-size: 14px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: #0073e6; }
+        .btn-success { background: var(--success); color: #fff; }
+        .btn-danger { background: var(--danger); color: #fff; }
+        .btn-default { background: #fff; border: 1px solid var(--gray-3); color: var(--gray-6); }
+        .btn-default:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-sm { padding: 4px 12px; font-size: 12px; }
+        
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .tag-primary { background: var(--primary-light); color: var(--primary); }
+        .tag-success { background: #f6ffed; color: var(--success); }
+        .tag-warning { background: #fffbe6; color: var(--warning); }
+        .tag-danger { background: #fff2f0; color: var(--danger); }
+        
+        .progress-bar { width: 100%; height: 8px; background: var(--gray-2); border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.3s; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 8px; width: 90%; max-width: 700px; max-height: 80vh; overflow-y: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-3); display: flex; justify-content: space-between; align-items: center; }
+        .modal-title { font-size: 16px; font-weight: 600; }
+        .modal-close { font-size: 24px; cursor: pointer; color: var(--gray-5); line-height: 1; }
+        .modal-close:hover { color: var(--gray-7); }
+        .modal-body { padding: 20px; }
+        .modal-footer { padding: 12px 20px; border-top: 1px solid var(--gray-3); display: flex; justify-content: flex-end; gap: 10px; }
+        
+        .toast { position: fixed; top: 20px; right: 20px; background: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; align-items: center; gap: 10px; z-index: 2000; animation: slideIn 0.3s ease; }
+        .toast.show { display: flex; }
+        .toast-success { border-left: 4px solid var(--success); }
+        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--gray-6); }
+        .form-input { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-3); border-radius: 4px; font-size: 14px; }
+        .form-input:focus { outline: none; border-color: var(--primary); }
+        .form-select { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-3); border-radius: 4px; font-size: 14px; background: #fff; }
+        
+        .tabs { display: flex; border-bottom: 2px solid var(--gray-3); margin-bottom: 20px; }
+        .tab-item { padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+        .tab-item.active { border-bottom-color: var(--primary); color: var(--primary); font-weight: 600; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        .timeline { padding: 10px 0; }
+        .timeline-item { display: flex; gap: 12px; margin-bottom: 16px; }
+        .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--primary); margin-top: 5px; flex-shrink: 0; }
+        .timeline-content { flex: 1; }
+        .timeline-time { font-size: 12px; color: var(--gray-5); margin-bottom: 4px; }
+        .timeline-text { font-size: 13px; }
+        
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        .search-input { flex: 1; padding: 10px 16px; border: 1px solid var(--gray-3); border-radius: 4px; font-size: 14px; }
+        .search-input:focus { outline: none; border-color: var(--primary); }
+        
+        .ai-float-btn { position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,137,255,0.3); z-index: 100; transition: all 0.2s; }
+        .ai-float-btn:hover { transform: scale(1.1); }
+        
+        .chat-modal { position: fixed; bottom: 100px; right: 30px; width: 360px; height: 500px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: none; flex-direction: column; z-index: 100; }
+        .chat-modal.show { display: flex; }
+        .chat-header { padding: 16px; border-bottom: 1px solid var(--gray-3); font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 16px; }
+        .chat-message { margin-bottom: 12px; }
+        .chat-message.user { text-align: right; }
+        .chat-bubble { display: inline-block; max-width: 80%; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.5; }
+        .chat-message.ai .chat-bubble { background: var(--gray-1); }
+        .chat-message.user .chat-bubble { background: var(--primary); color: #fff; }
+        .chat-input-area { padding: 12px; border-top: 1px solid var(--gray-3); display: flex; gap: 10px; }
+        .chat-input { flex: 1; padding: 8px 12px; border: 1px solid var(--gray-3); border-radius: 4px; font-size: 13px; }
+        .chat-send { padding: 8px 16px; background: var(--primary); color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        
+        .chart-container { width: 100%; height: 300px; position: relative; }
+        
+        .gantt-chart { overflow-x: auto; }
+        .gantt-row { display: flex; align-items: center; margin-bottom: 8px; }
+        .gantt-label { width: 150px; font-size: 13px; flex-shrink: 0; }
+        .gantt-bar-container { flex: 1; position: relative; height: 30px; background: var(--gray-1); border-radius: 4px; }
+        .gantt-bar { position: absolute; height: 100%; background: var(--primary); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; }
+        
+        @media (max-width: 768px) { .sidebar { width: 60px; } .sidebar-header h2, .sidebar-header p, .nav-text { display: none; } .nav-item { justify-content: center; padding: 12px; } }
+        
+        .footer { text-align: center; padding: 20px; color: var(--gray-5); font-size: 12px; border-top: 1px solid var(--gray-3); margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>泽亨实业</h2>
+                <p>数字化管理平台</p>
+            </div>
+            <nav class="nav-menu">
+                <div class="nav-item active" data-page="home"><span class="nav-icon">🏠</span><span class="nav-text">统一门户首页</span></div>
+                <div class="nav-item" data-page="projects"><span class="nav-icon">📊</span><span class="nav-text">项目管理中心</span></div>
+                <div class="nav-item" data-page="tickets"><span class="nav-icon">🔧</span><span class="nav-text">售后服务工单</span></div>
+                <div class="nav-item" data-page="inventory"><span class="nav-icon">📦</span><span class="nav-text">备件库存管理</span></div>
+                <div class="nav-item" data-page="knowledge"><span class="nav-icon">📚</span><span class="nav-text">知识库</span></div>
+                <div class="nav-item" data-page="dashboard"><span class="nav-icon">📈</span><span class="nav-text">经营看板</span></div>
+                <div class="nav-item" data-page="approval"><span class="nav-icon">✅</span><span class="nav-text">审批中心</span></div>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="header">
+                <div class="header-title" id="pageTitle">统一门户首页</div>
+                <div class="header-user"><span>林总</span><div class="user-avatar">林</div></div>
+            </header>
+            
+            <div class="content-area">
+                <!-- 1. 统一门户首页 -->
+                <section class="page-section active" id="page-home">
+                    <div class="card">
+                        <h2 style="margin-bottom: 20px;">你好，林总 👋</h2>
+                        <div class="kpi-grid">
+                            <div class="kpi-card"><div class="kpi-label">在建项目数</div><div class="kpi-value">12</div><div class="kpi-trend trend-up">↑ 较上月 +2</div></div>
+                            <div class="kpi-card"><div class="kpi-label">本月签约额</div><div class="kpi-value">¥285万</div><div class="kpi-trend trend-up">↑ 较上月 +15%</div></div>
+                            <div class="kpi-card"><div class="kpi-label">待处理工单</div><div class="kpi-value">5</div><div class="kpi-trend trend-down">↓ 较昨日 -2</div></div>
+                            <div class="kpi-card"><div class="kpi-label">客户满意度</div><div class="kpi-value">96.8%</div><div class="kpi-trend trend-up">↑ 较上月 +0.5%</div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">快捷入口</div>
+                        <div class="quick-actions">
+                            <div class="action-btn" onclick="navigateTo('projects'); setTimeout(() => openModal('newProjectModal'), 300)"><div class="action-icon">➕</div><div class="action-text">新建项目</div></div>
+                            <div class="action-btn" onclick="navigateTo('tickets'); setTimeout(() => openModal('newTicketModal'), 300)"><div class="action-icon">🔧</div><div class="action-text">报修工单</div></div>
+                            <div class="action-btn" onclick="navigateTo('knowledge')"><div class="action-icon">🔍</div><div class="action-text">知识查询</div></div>
+                            <div class="action-btn" onclick="navigateTo('approval')"><div class="action-icon">📝</div><div class="action-text">审批中心</div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">最近动态</div>
+                        <table class="data-table">
+                            <thead><tr><th>时间</th><th>类型</th><th>内容</th><th>操作人</th></tr></thead>
+                            <tbody>
+                                <tr><td>今天 14:30</td><td><span class="tag tag-success">项目更新</span></td><td>比亚迪新能源涂装线项目进入调试阶段</td><td>张工</td></tr>
+                                <tr><td>今天 11:20</td><td><span class="tag tag-primary">工单完成</span></td><td>格力电器喷涂设备故障已修复</td><td>李师傅</td></tr>
+                                <tr><td>昨天 16:45</td><td><span class="tag tag-warning">新工单</span></td><td>美的集团粉末回收系统异常报警</td><td>系统自动</td></tr>
+                                <tr><td>昨天 10:00</td><td><span class="tag tag-success">合同签署</span></td><td>与海尔智家签订年度服务协议</td><td>王经理</td></tr>
+                                <tr><td>前天 09:30</td><td><span class="tag tag-primary">知识更新</span></td><td>新增《新能源汽车电池壳涂装工艺规范》</td><td>技术部</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- 2. 项目管理中心 -->
+                <section class="page-section" id="page-projects">
+                    <div class="card">
+                        <div class="card-title">
+                            <span>项目列表</span>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-default btn-sm" onclick="toggleProjectView('list')">📋 列表视图</button>
+                                <button class="btn btn-default btn-sm" onclick="toggleProjectView('gantt')">📊 甘特图</button>
+                                <button class="btn btn-primary btn-sm" onclick="openModal('newProjectModal')">➕ 新建项目</button>
+                            </div>
+                        </div>
+                        
+                        <div id="projectListView">
+                            <table class="data-table" id="projectTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('projectTable', 0)">项目名称 ↕</th>
+                                        <th onclick="sortTable('projectTable', 1)">客户 ↕</th>
+                                        <th onclick="sortTable('projectTable', 2)">阶段 ↕</th>
+                                        <th onclick="sortTable('projectTable', 3)">金额 ↕</th>
+                                        <th>负责人</th>
+                                        <th>进度</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="projectGanttView" style="display: none;">
+                            <div class="gantt-chart" id="ganttChart"></div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 3. 售后服务工单 -->
+                <section class="page-section" id="page-tickets">
+                    <div class="card">
+                        <div class="card-title">
+                            <span>工单列表</span>
+                            <button class="btn btn-primary btn-sm" onclick="openModal('newTicketModal')">➕ 新建工单</button>
+                        </div>
+                        <table class="data-table" id="ticketTable">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortTable('ticketTable', 0)">工单号 ↕</th>
+                                    <th>客户</th>
+                                    <th>设备型号</th>
+                                    <th>故障描述</th>
+                                    <th>状态</th>
+                                    <th>紧急度</th>
+                                    <th>处理人</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticketTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <!-- 4. 备件库存管理 -->
+                <section class="page-section" id="page-inventory">
+                    <div class="card">
+                        <div class="tabs">
+                            <div class="tab-item active" onclick="switchTab(this, 'inventoryList')">备件列表</div>
+                            <div class="tab-item" onclick="switchTab(this, 'inventoryInOut')">出入库记录</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="inventoryList">
+                            <table class="data-table" id="inventoryTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('inventoryTable', 0)">编码 ↕</th>
+                                        <th>名称</th>
+                                        <th>规格</th>
+                                        <th onclick="sortTable('inventoryTable', 3)">库存量 ↕</th>
+                                        <th>安全库存</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tab-content" id="inventoryInOut">
+                            <table class="data-table">
+                                <thead><tr><th>时间</th><th>类型</th><th>备件名称</th><th>数量</th><th>操作人</th><th>备注</th></tr></thead>
+                                <tbody>
+                                    <tr><td>2026-01-15 14:30</td><td><span class="tag tag-success">入库</span></td><td>喷枪喷嘴</td><td>+50</td><td>仓库管理员</td><td>采购补货</td></tr>
+                                    <tr><td>2026-01-15 10:20</td><td><span class="tag tag-danger">出库</span></td><td>高压泵密封圈</td><td>-5</td><td>李师傅</td><td>工单WO20260115003维修使用</td></tr>
+                                    <tr><td>2026-01-14 16:00</td><td><span class="tag tag-danger">出库</span></td><td>粉末回收滤芯</td><td>-2</td><td>张工</td><td>工单WO20260114002更换</td></tr>
+                                    <tr><td>2026-01-14 09:15</td><td><span class="tag tag-success">入库</span></td><td>静电发生器模块</td><td>+3</td><td>仓库管理员</td><td>供应商送货</td></tr>
+                                    <tr><td>2026-01-13 11:30</td><td><span class="tag tag-danger">出库</span></td><td>输送链链条</td><td>-10米</td><td>王师傅</td><td>定期维护更换</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 5. 知识库 -->
+                <section class="page-section" id="page-knowledge">
+                    <div class="card">
+                        <div class="search-box">
+                            <input type="text" class="search-input" id="knowledgeSearch" placeholder="搜索技术文档、故障案例、工艺参数..." onkeyup="searchKnowledge()">
+                            <button class="btn btn-primary" onclick="searchKnowledge()">🔍 搜索</button>
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <span style="font-size: 13px; color: var(--gray-5); margin-right: 10px;">分类筛选：</span>
+                            <span class="tag tag-primary" style="cursor: pointer; margin-right: 8px;" onclick="filterKnowledge('all')">全部</span>
+                            <span class="tag" style="cursor: pointer; margin-right: 8px;" onclick="filterKnowledge('tech')">技术文档</span>
+                            <span class="tag" style="cursor: pointer; margin-right: 8px;" onclick="filterKnowledge('case')">故障案例</span>
+                            <span class="tag" style="cursor: pointer; margin-right: 8px;" onclick="filterKnowledge('process')">工艺参数</span>
+                            <span class="tag" style="cursor: pointer;" onclick="filterKnowledge('patent')">专利摘要</span>
+                        </div>
+                        
+                        <div id="knowledgeResults"></div>
+                    </div>
+                </section>
+                <!-- 6. 经营看板 -->
+                <section class="page-section" id="page-dashboard">
+                    <div class="kpi-grid">
+                        <div class="kpi-card"><div class="kpi-label">年度营收目标</div><div class="kpi-value">¥3,200万</div><div class="kpi-trend">已完成 68%</div></div>
+                        <div class="kpi-card"><div class="kpi-label">活跃客户数</div><div class="kpi-value">45</div><div class="kpi-trend trend-up">↑ 较年初 +8</div></div>
+                        <div class="kpi-card"><div class="kpi-label">平均项目周期</div><div class="kpi-value">4.2月</div><div class="kpi-trend trend-up">↓ 缩短0.3月</div></div>
+                        <div class="kpi-card"><div class="kpi-label">复购率</div><div class="kpi-value">72%</div><div class="kpi-trend trend-up">↑ 行业领先</div></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px;">
+                        <div class="card">
+                            <div class="card-title">营收趋势（近12个月）</div>
+                            <div class="chart-container" id="revenueChart"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">项目阶段分布</div>
+                            <div class="chart-container" id="phaseChart"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">区域业绩对比</div>
+                            <div class="chart-container" id="regionChart"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-title">客户行业分布</div>
+                            <div class="chart-container" id="industryChart"></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 7. 审批中心 -->
+                <section class="page-section" id="page-approval">
+                    <div class="card">
+                        <div class="tabs">
+                            <div class="tab-item active" onclick="switchApprovalTab(this, 'pending')">待我审批</div>
+                            <div class="tab-item" onclick="switchApprovalTab(this, 'approved')">我已审批</div>
+                            <div class="tab-item" onclick="switchApprovalTab(this, 'initiated')">我发起的</div>
+                        </div>
+                        
+                        <div class="tab-content active" id="approvalPending">
+                            <table class="data-table" id="approvalPendingTable">
+                                <thead><tr><th>类型</th><th>申请人</th><th>金额</th><th>状态</th><th>申请时间</th><th>操作</th></tr></thead>
+                                <tbody id="approvalPendingBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tab-content" id="approvalApproved">
+                            <table class="data-table">
+                                <thead><tr><th>类型</th><th>申请人</th><th>金额</th><th>审批结果</th><th>审批时间</th></tr></thead>
+                                <tbody>
+                                    <tr><td>采购申请</td><td>张工</td><td>¥12,500</td><td><span class="tag tag-success">已同意</span></td><td>2026-01-14 15:30</td></tr>
+                                    <tr><td>费用报销</td><td>李师傅</td><td>¥3,200</td><td><span class="tag tag-success">已同意</span></td><td>2026-01-13 10:20</td></tr>
+                                    <tr><td>合同审批</td><td>王经理</td><td>¥850,000</td><td><span class="tag tag-danger">已拒绝</span></td><td>2026-01-12 16:45</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tab-content" id="approvalInitiated">
+                            <table class="data-table">
+                                <thead><tr><th>类型</th><th>金额</th><th>当前状态</th><th>申请时间</th></tr></thead>
+                                <tbody>
+                                    <tr><td>项目立项</td><td>¥1,200,000</td><td><span class="tag tag-warning">审批中</span></td><td>2026-01-15 09:00</td></tr>
+                                    <tr><td>设备采购</td><td>¥45,000</td><td><span class="tag tag-success">已通过</span></td><td>2026-01-10 14:30</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <div class="footer">© 2026 悟空AI | 广州泽亨实业有限公司专属Demo</div>
+            </div>
+        </main>
+    </div>
+    <!-- 模态框：项目详情 -->
+    <div class="modal-overlay" id="projectDetailModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">项目详情</span><span class="modal-close" onclick="closeModal('projectDetailModal')">&times;</span></div>
+            <div class="modal-body" id="projectDetailContent"></div>
+            <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('projectDetailModal')">关闭</button></div>
+        </div>
+    </div>
+    
+    <!-- 模态框：新建项目 -->
+    <div class="modal-overlay" id="newProjectModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">新建项目</span><span class="modal-close" onclick="closeModal('newProjectModal')">&times;</span></div>
+            <div class="modal-body">
+                <div class="form-group"><label class="form-label">项目名称</label><input type="text" class="form-input" id="newProjectName" placeholder="请输入项目名称"></div>
+                <div class="form-group"><label class="form-label">客户名称</label><input type="text" class="form-input" id="newProjectClient" placeholder="请输入客户名称"></div>
+                <div class="form-group"><label class="form-label">项目阶段</label><select class="form-select" id="newProjectPhase"><option>需求调研</option><option>方案设计</option><option>设备制造</option><option>安装调试</option><option>验收交付</option></select></div>
+                <div class="form-group"><label class="form-label">项目金额（万元）</label><input type="number" class="form-input" id="newProjectAmount" placeholder="请输入金额"></div>
+                <div class="form-group"><label class="form-label">负责人</label><input type="text" class="form-input" id="newProjectManager" placeholder="请输入负责人"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" onclick="closeModal('newProjectModal')">取消</button>
+                <button class="btn btn-primary" onclick="createProject()">创建项目</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 模态框：工单详情 -->
+    <div class="modal-overlay" id="ticketDetailModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">工单详情</span><span class="modal-close" onclick="closeModal('ticketDetailModal')">&times;</span></div>
+            <div class="modal-body" id="ticketDetailContent"></div>
+            <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('ticketDetailModal')">关闭</button></div>
+        </div>
+    </div>
+    
+    <!-- 模态框：新建工单 -->
+    <div class="modal-overlay" id="newTicketModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">新建工单</span><span class="modal-close" onclick="closeModal('newTicketModal')">&times;</span></div>
+            <div class="modal-body">
+                <div class="form-group"><label class="form-label">客户名称</label><input type="text" class="form-input" id="newTicketClient" placeholder="请输入客户名称"></div>
+                <div class="form-group"><label class="form-label">设备型号</label><input type="text" class="form-input" id="newTicketDevice" placeholder="请输入设备型号"></div>
+                <div class="form-group"><label class="form-label">故障描述</label><textarea class="form-input" id="newTicketDesc" rows="3" placeholder="请详细描述故障情况"></textarea></div>
+                <div class="form-group"><label class="form-label">紧急程度</label><select class="form-select" id="newTicketUrgency"><option>低</option><option>中</option><option selected>高</option><option>紧急</option></select></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" onclick="closeModal('newTicketModal')">取消</button>
+                <button class="btn btn-primary" onclick="createTicket()">提交工单</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 模态框：审批详情 -->
+    <div class="modal-overlay" id="approvalDetailModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">审批详情</span><span class="modal-close" onclick="closeModal('approvalDetailModal')">&times;</span></div>
+            <div class="modal-body" id="approvalDetailContent"></div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" onclick="handleApproval('reject')">拒绝</button>
+                <button class="btn btn-success" onclick="handleApproval('approve')">同意</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI助手浮动按钮 -->
+    <div class="ai-float-btn" onclick="toggleChat()">🤖</div>
+    
+    <!-- AI聊天对话框 -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-header"><span>AI助手</span><span style="cursor: pointer;" onclick="toggleChat()">&times;</span></div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message ai"><div class="chat-bubble">您好！我是泽亨实业的AI助手，可以帮您查询技术文档、故障案例、工艺参数等信息。请问有什么可以帮您的？</div></div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="输入您的问题..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+            <button class="chat-send" onclick="sendChatMessage()">发送</button>
+        </div>
+    </div>
+    
+    <!-- Toast提示 -->
+    <div class="toast toast-success" id="toast"><span>✅</span><span id="toastMessage">操作成功</span></div>
+    <script>
+        // 模拟数据
+        const projectsData = [
+            { name: '比亚迪新能源涂装线', client: '比亚迪', phase: '安装调试', amount: 280, manager: '张工', progress: 75, startDate: '2025-10-01', endDate: '2026-03-15' },
+            { name: '格力电器粉末喷涂系统', client: '格力电器', phase: '验收交付', amount: 195, manager: '李师傅', progress: 92, startDate: '2025-08-15', endDate: '2026-01-30' },
+            { name: '美的集团自动化产线', client: '美的集团', phase: '设备制造', amount: 420, manager: '王经理', progress: 58, startDate: '2025-11-01', endDate: '2026-05-20' },
+            { name: '海尔智家智能涂装项目', client: '海尔智家', phase: '方案设计', amount: 165, manager: '张工', progress: 35, startDate: '2026-01-05', endDate: '2026-06-30' },
+            { name: '宁德时代电池壳涂装', client: '宁德时代', phase: '需求调研', amount: 350, manager: '李师傅', progress: 15, startDate: '2026-01-10', endDate: '2026-07-15' },
+            { name: '上汽集团零部件喷涂', client: '上汽集团', phase: '安装调试', amount: 225, manager: '王经理', progress: 68, startDate: '2025-09-20', endDate: '2026-02-28' },
+            { name: 'TCL家电涂装升级', client: 'TCL', phase: '验收交付', amount: 138, manager: '张工', progress: 88, startDate: '2025-07-01', endDate: '2026-01-15' },
+            { name: '富士康精密喷涂线', client: '富士康', phase: '设备制造', amount: 310, manager: '李师傅', progress: 52, startDate: '2025-12-01', endDate: '2026-04-30' }
+        ];
+        
+        const ticketsData = [
+            { id: 'WO20260115001', client: '格力电器', device: 'ZH-3000喷涂机', desc: '喷枪堵塞，出粉不均匀', status: '处理中', urgency: '高', handler: '李师傅' },
+            { id: 'WO20260115002', client: '美的集团', device: 'ZH-5000回收系统', desc: '粉末回收效率下降30%', status: '待分配', urgency: '中', handler: '-' },
+            { id: 'WO20260114001', client: '比亚迪', device: 'ZH-2000固化炉', desc: '温度控制异常，波动±15℃', status: '已完成', urgency: '紧急', handler: '张工' },
+            { id: 'WO20260114002', client: '海尔智家', device: 'ZH-3000喷涂机', desc: '静电发生器报警', status: '处理中', urgency: '高', handler: '王师傅' },
+            { id: 'WO20260113001', client: '宁德时代', device: 'ZH-5000回收系统', desc: '滤芯压差过大', status: '已关闭', urgency: '低', handler: '李师傅' },
+            { id: 'WO20260112001', client: '上汽集团', device: 'ZH-2000固化炉', desc: '传送带跑偏', status: '已完成', urgency: '中', handler: '张工' },
+            { id: 'WO20260111001', client: 'TCL', device: 'ZH-3000喷涂机', desc: '控制面板无响应', status: '已关闭', urgency: '高', handler: '王师傅' },
+            { id: 'WO20260110001', client: '富士康', device: 'ZH-5000回收系统', desc: '风机噪音异常', status: '待分配', urgency: '低', handler: '-' },
+            { id: 'WO20260109001', client: '格力电器', device: 'ZH-2000固化炉', desc: '加热管损坏', status: '已完成', urgency: '紧急', handler: '李师傅' },
+            { id: 'WO20260108001', client: '美的集团', device: 'ZH-3000喷涂机', desc: '粉末流量不稳定', status: '处理中', urgency: '中', handler: '张工' }
+        ];
+        
+        const inventoryData = [
+            { code: 'SP001', name: '喷枪喷嘴', spec: 'Φ1.2mm', stock: 120, safety: 50, status: '正常' },
+            { code: 'SP002', name: '高压泵密封圈', spec: '标准型', stock: 35, safety: 30, status: '正常' },
+            { code: 'SP003', name: '粉末回收滤芯', spec: 'ZH-5000专用', stock: 18, safety: 20, status: '预警' },
+            { code: 'SP004', name: '静电发生器模块', spec: '60KV', stock: 8, safety: 5, status: '正常' },
+            { code: 'SP005', name: '输送链链条', spec: '10米/卷', stock: 25, safety: 10, status: '正常' },
+            { code: 'SP006', name: '加热管', spec: '2000W', stock: 12, safety: 15, status: '预警' },
+            { code: 'SP007', name: '温控传感器', spec: 'PT100', stock: 30, safety: 20, status: '正常' },
+            { code: 'SP008', name: '风机叶轮', spec: 'Φ300mm', stock: 6, safety: 5, status: '正常' },
+            { code: 'SP009', name: '控制面板主板', spec: 'ZH系列通用', stock: 4, safety: 3, status: '正常' },
+            { code: 'SP010', name: '粉末流化器', spec: '标准型', stock: 15, safety: 10, status: '正常' },
+            { code: 'SP011', name: '喷枪电极针', spec: 'Φ2mm', stock: 80, safety: 50, status: '正常' },
+            { code: 'SP012', name: '回收布袋', spec: '抗静电型', stock: 45, safety: 30, status: '正常' },
+            { code: 'SP013', name: '固化炉隔热棉', spec: '耐高温型', stock: 20, safety: 15, status: '正常' },
+            { code: 'SP014', name: '气动阀门', spec: 'DN25', stock: 10, safety: 8, status: '正常' },
+            { code: 'SP015', name: '变频器', spec: '7.5KW', stock: 3, safety: 5, status: '预警' }
+        ];
+        
+        const knowledgeData = [
+            { title: '新能源汽车电池壳涂装工艺规范', category: 'tech', summary: '详细介绍了锂电池外壳粉末涂装的前处理、喷涂参数、固化温度等关键工艺要求...', relevance: 95 },
+            { title: 'ZH-3000喷涂机常见故障排查手册', category: 'case', summary: '包含喷枪堵塞、出粉不均、静电异常等20种常见故障的诊断流程和解决方案...', relevance: 92 },
+            { title: '汽车零部件粉末涂料选型指南', category: 'tech', summary: '针对发动机部件、底盘件、内饰件等不同应用场景的涂料性能要求和推荐配方...', relevance: 88 },
+            { title: '粉末回收系统效率优化案例', category: 'case', summary: '某家电企业通过调整风量、更换滤芯等措施，将回收效率从85%提升至95%的实践...', relevance: 85 },
+            { title: '高温固化炉温度均匀性控制技术', category: 'process', summary: '通过多点测温、PID调节、热风循环优化等手段实现±5℃的温度控制精度...', relevance: 90 },
+            { title: '静电喷涂电压与膜厚关系研究', category: 'patent', summary: '专利摘要：一种基于自适应电压调节的膜厚控制方法，可提高涂层均匀性15%以上...', relevance: 82 },
+            { title: '家电外壳粉末涂装色差控制方案', category: 'process', summary: '从原料批次管理、喷涂参数标准化、固化曲线优化三个维度解决色差问题...', relevance: 87 },
+            { title: '粉末涂料固化反应动力学模型', category: 'patent', summary: '专利摘要：建立了一种预测不同温度下固化程度的数学模型，用于优化固化工艺...', relevance: 78 },
+            { title: '大型工件喷涂机器人路径规划', category: 'tech', summary: '针对不规则形状工件的自动喷涂路径生成算法，可减少涂料浪费20%...', relevance: 84 },
+            { title: '粉末回收滤芯寿命评估方法', category: 'case', summary: '通过压差监测、透气性测试等手段判断滤芯更换时机，避免过早或过晚更换...', relevance: 80 },
+            { title: '环保型低温固化粉末涂料开发', category: 'patent', summary: '专利摘要：一种可在160℃固化的环氧-聚酯混合型粉末涂料，节能30%以上...', relevance: 76 },
+            { title: '喷涂车间粉尘爆炸风险评估与控制', category: 'tech', summary: '从设备接地、通风换气、防爆电气等方面系统阐述粉尘爆炸防控措施...', relevance: 91 }
+        ];
+        
+        const approvalData = [
+            { type: '采购申请', applicant: '张工', amount: '¥12,500', status: '待审批', time: '2026-01-15 10:30', detail: '采购喷枪喷嘴50个、高压泵密封圈10套，用于日常维护备件补充。' },
+            { type: '费用报销', applicant: '李师傅', amount: '¥3,200', status: '待审批', time: '2026-01-15 09:15', detail: '出差格力电器现场维修交通费、住宿费报销。' },
+            { type: '合同审批', applicant: '王经理', amount: '¥850,000', status: '待审批', time: '2026-01-14 16:45', detail: '与美的集团签订年度维保服务合同，期限12个月。' },
+            { type: '项目立项', applicant: '技术部', amount: '¥1,200,000', status: '待审批', time: '2026-01-14 14:20', detail: '宁德时代电池壳涂装线项目立项申请，预计周期6个月。' },
+            { type: '设备采购', applicant: '生产部', amount: '¥45,000', status: '待审批', time: '2026-01-13 11:00', detail: '采购备用静电发生器模块3台，用于应急替换。' },
+            { type: '人员招聘', applicant: '人力资源部', amount: '-', status: '待审批', time: '2026-01-12 15:30', detail: '招聘高级涂装工程师2名，月薪范围15-20K。' }
+        ];
+        // 导航切换
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                navigateTo(this.dataset.page);
+            });
+        });
+        
+        function navigateTo(page) {
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+            
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`page-${page}`).classList.add('active');
+            
+            const titles = { home: '统一门户首页', projects: '项目管理中心', tickets: '售后服务工单', inventory: '备件库存管理', knowledge: '知识库', dashboard: '经营看板', approval: '审批中心' };
+            document.getElementById('pageTitle').textContent = titles[page];
+            
+            if (page === 'projects') renderProjects();
+            if (page === 'tickets') renderTickets();
+            if (page === 'inventory') renderInventory();
+            if (page === 'knowledge') renderKnowledge(knowledgeData);
+            if (page === 'dashboard') renderCharts();
+            if (page === 'approval') renderApproval();
+        }
+        
+        // Toast提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        // 模态框
+        function openModal(id) {
+            document.getElementById(id).classList.add('show');
+        }
+        
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+        
+        // Tab切换
+        function switchTab(element, tabId) {
+            element.parentElement.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            
+            const parent = element.closest('.card');
+            parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+        
+        // 渲染项目列表
+        function renderProjects() {
+            const tbody = document.getElementById('projectTableBody');
+            tbody.innerHTML = projectsData.map(p => `
+                <tr>
+                    <td><a href="#" onclick="showProjectDetail('${p.name}'); return false;" style="color: var(--primary); text-decoration: none;">${p.name}</a></td>
+                    <td>${p.client}</td>
+                    <td><span class="tag tag-primary">${p.phase}</span></td>
+                    <td>¥${p.amount}万</td>
+                    <td>${p.manager}</td>
+                    <td><div class="progress-bar"><div class="progress-fill" style="width: ${p.progress}%"></div></div><div style="font-size: 11px; margin-top: 4px;">${p.progress}%</div></td>
+                    <td><button class="btn btn-default btn-sm" onclick="showProjectDetail('${p.name}')">详情</button></td>
+                </tr>
+            `).join('');
+        }
+        
+        // 显示项目详情
+        function showProjectDetail(name) {
+            const p = projectsData.find(x => x.name === name);
+            if (!p) return;
+            
+            document.getElementById('projectDetailContent').innerHTML = `
+                <h3 style="margin-bottom: 16px;">${p.name}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                    <div><strong>客户：</strong>${p.client}</div>
+                    <div><strong>阶段：</strong><span class="tag tag-primary">${p.phase}</span></div>
+                    <div><strong>金额：</strong>¥${p.amount}万</div>
+                    <div><strong>负责人：</strong>${p.manager}</div>
+                    <div><strong>进度：</strong>${p.progress}%</div>
+                    <div><strong>周期：</strong>${p.startDate} 至 ${p.endDate}</div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">里程碑</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">2025-10-01</div><div class="timeline-text">项目启动，完成需求调研</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">2025-11-15</div><div class="timeline-text">方案评审通过</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">2025-12-20</div><div class="timeline-text">设备制造完成80%</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot" style="background: var(--warning);"></div><div class="timeline-content"><div class="timeline-time">进行中</div><div class="timeline-text">现场安装调试</div></div></div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">最近沟通记录</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">今天 14:30</div><div class="timeline-text">张工：设备已就位，开始连接管道和电气线路</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">昨天 16:00</div><div class="timeline-text">客户方：确认下周可以进行试喷涂测试</div></div></div>
+                </div>
+            `;
+            openModal('projectDetailModal');
+        }
+        
+        // 创建新项目
+        function createProject() {
+            const name = document.getElementById('newProjectName').value;
+            const client = document.getElementById('newProjectClient').value;
+            const phase = document.getElementById('newProjectPhase').value;
+            const amount = document.getElementById('newProjectAmount').value;
+            const manager = document.getElementById('newProjectManager').value;
+            
+            if (!name || !client || !amount) {
+                showToast('请填写完整信息');
+                return;
+            }
+            
+            projectsData.unshift({
+                name, client, phase, amount: parseFloat(amount), manager: manager || '待分配',
+                progress: 0, startDate: new Date().toISOString().split('T')[0], endDate: '待定'
+            });
+            
+            closeModal('newProjectModal');
+            renderProjects();
+            showToast('项目创建成功');
+            
+            // 清空表单
+            ['newProjectName', 'newProjectClient', 'newProjectAmount', 'newProjectManager'].forEach(id => document.getElementById(id).value = '');
+        }
+        
+        // 切换项目视图
+        function toggleProjectView(view) {
+            if (view === 'list') {
+                document.getElementById('projectListView').style.display = 'block';
+                document.getElementById('projectGanttView').style.display = 'none';
+            } else {
+                document.getElementById('projectListView').style.display = 'none';
+                document.getElementById('projectGanttView').style.display = 'block';
+                renderGantt();
+            }
+        }
+        
+        // 渲染甘特图
+        function renderGantt() {
+            const container = document.getElementById('ganttChart');
+            const totalDays = 365;
+            const start = new Date('2025-07-01');
+            
+            container.innerHTML = projectsData.map(p => {
+                const pStart = new Date(p.startDate);
+                const pEnd = new Date(p.endDate.includes('待定') ? '2026-12-31' : p.endDate);
+                const offset = Math.max(0, (pStart - start) / (1000 * 60 * 60 * 24));
+                const duration = (pEnd - pStart) / (1000 * 60 * 60 * 24);
+                const leftPercent = (offset / totalDays) * 100;
+                const widthPercent = Math.min((duration / totalDays) * 100, 100 - leftPercent);
+                
+                return `<div class="gantt-row">
+                    <div class="gantt-label">${p.name.substring(0, 8)}...</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="left: ${leftPercent}%; width: ${widthPercent}%;">${p.progress}%</div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        // 渲染工单列表
+        function renderTickets() {
+            const tbody = document.getElementById('ticketTableBody');
+            tbody.innerHTML = ticketsData.map(t => {
+                let statusClass = 'tag-warning';
+                if (t.status === '处理中') statusClass = 'tag-primary';
+                if (t.status === '已完成') statusClass = 'tag-success';
+                if (t.status === '已关闭') statusClass = 'tag-danger';
+                
+                let urgencyClass = 'tag-primary';
+                if (t.urgency === '紧急') urgencyClass = 'tag-danger';
+                if (t.urgency === '高') urgencyClass = 'tag-warning';
+                
+                return `<tr>
+                    <td>${t.id}</td>
+                    <td>${t.client}</td>
+                    <td>${t.device}</td>
+                    <td>${t.desc}</td>
+                    <td><span class="tag ${statusClass}">${t.status}</span></td>
+                    <td><span class="tag ${urgencyClass}">${t.urgency}</span></td>
+                    <td>${t.handler}</td>
+                    <td><button class="btn btn-default btn-sm" onclick="showTicketDetail('${t.id}')">详情</button></td>
+                </tr>`;
+            }).join('');
+        }
+        
+        // 显示工单详情
+        function showTicketDetail(id) {
+            const t = ticketsData.find(x => x.id === id);
+            if (!t) return;
+            
+            document.getElementById('ticketDetailContent').innerHTML = `
+                <h3 style="margin-bottom: 16px;">工单 ${t.id}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                    <div><strong>客户：</strong>${t.client}</div>
+                    <div><strong>设备型号：</strong>${t.device}</div>
+                    <div><strong>状态：</strong><span class="tag tag-primary">${t.status}</span></div>
+                    <div><strong>紧急度：</strong><span class="tag tag-warning">${t.urgency}</span></div>
+                    <div><strong>处理人：</strong>${t.handler}</div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">故障描述</h4>
+                <p style="margin-bottom: 16px; padding: 12px; background: var(--gray-1); border-radius: 4px;">${t.desc}</p>
+                
+                <h4 style="margin: 16px 0 10px;">处理记录</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">今天 09:30</div><div class="timeline-text">系统自动创建工单</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">今天 10:15</div><div class="timeline-text">${t.handler !== '-' ? t.handler : '待分配'}：已接单，准备前往现场</div></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-time">今天 14:20</div><div class="timeline-text">初步诊断：需要更换相关配件</div></div></div>
+                </div>
+            `;
+            openModal('ticketDetailModal');
+        }
+        
+        // 创建新工单
+        function createTicket() {
+            const client = document.getElementById('newTicketClient').value;
+            const device = document.getElementById('newTicketDevice').value;
+            const desc = document.getElementById('newTicketDesc').value;
+            const urgency = document.getElementById('newTicketUrgency').value;
+            
+            if (!client || !device || !desc) {
+                showToast('请填写完整信息');
+                return;
+            }
+            
+            const now = new Date();
+            const dateStr = now.toISOString().slice(0,10).replace(/-/g,'');
+            const randomNum = String(Math.floor(Math.random() * 900) + 100);
+            const newId = `WO${dateStr}${randomNum}`;
+            
+            ticketsData.unshift({
+                id: newId, client, device, desc, status: '待分配', urgency, handler: '-'
+            });
+            
+            closeModal('newTicketModal');
+            renderTickets();
+            showToast('工单创建成功');
+            
+            ['newTicketClient', 'newTicketDevice', 'newTicketDesc'].forEach(id => document.getElementById(id).value = '');
+        }
+        
+        // 渲染库存列表
+        function renderInventory() {
+            const tbody = document.getElementById('inventoryTableBody');
+            tbody.innerHTML = inventoryData.map(item => {
+                const isWarning = item.stock < item.safety;
+                return `<tr class="${isWarning ? 'warning-row' : ''}">
+                    <td>${item.code}</td>
+                    <td>${item.name}</td>
+                    <td>${item.spec}</td>
+                    <td>${item.stock}</td>
+                    <td>${item.safety}</td>
+                    <td><span class="tag ${isWarning ? 'tag-danger' : 'tag-success'}">${item.status}</span></td>
+                </tr>`;
+            }).join('');
+        }
+        
+        // 渲染知识库
+        let currentFilter = 'all';
+        function renderKnowledge(data) {
+            const container = document.getElementById('knowledgeResults');
+            const filtered = currentFilter === 'all' ? data : data.filter(k => k.category === currentFilter);
+            
+            container.innerHTML = filtered.map((k, idx) => `
+                <div style="padding: 16px; border-bottom: 1px solid var(--gray-2); cursor: pointer;" onclick="toggleKnowledgeDetail(${idx})">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h4 style="font-size: 14px; color: var(--primary);">${k.title}</h4>
+                        <span class="tag tag-primary">相关度 ${k.relevance}%</span>
+                    </div>
+                    <p style="font-size: 13px; color: var(--gray-6); margin-bottom: 8px;">${k.summary}</p>
+                    <div id="knowledge-detail-${idx}" style="display: none; margin-top: 12px; padding: 12px; background: var(--gray-1); border-radius: 4px; font-size: 13px; line-height: 1.6;">
+                        <strong>详细内容：</strong><br>
+                        这是关于"${k.title}"的完整文档内容。在实际系统中，这里会显示完整的技术文档、案例分析或专利全文。用户可以通过此功能快速查阅相关知识，提高工作效率。<br><br>
+                        <strong>关键词：</strong>粉末涂装、工艺优化、故障诊断、质量控制<br>
+                        <strong>更新时间：</strong>2026-01-10<br>
+                        <strong>浏览次数：</strong>${Math.floor(Math.random() * 500) + 50}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function toggleKnowledgeDetail(idx) {
+            const detail = document.getElementById(`knowledge-detail-${idx}`);
+            detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function filterKnowledge(category) {
+            currentFilter = category;
+            searchKnowledge();
+        }
+        
+        function searchKnowledge() {
+            const keyword = document.getElementById('knowledgeSearch').value.toLowerCase();
+            let filtered = knowledgeData;
+            
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(k => k.category === currentFilter);
+            }
+            
+            if (keyword) {
+                filtered = filtered.filter(k => 
+                    k.title.toLowerCase().includes(keyword) || 
+                    k.summary.toLowerCase().includes(keyword)
+                );
+            }
+            
+            renderKnowledge(filtered);
+        }
+        // 渲染图表
+        function renderCharts() {
+            renderRevenueChart();
+            renderPhaseChart();
+            renderRegionChart();
+            renderIndustryChart();
+        }
+        
+        // 营收趋势折线图
+        function renderRevenueChart() {
+            const container = document.getElementById('revenueChart');
+            const data = [180, 210, 195, 230, 245, 220, 260, 275, 250, 285, 270, 295];
+            const months = ['2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月'];
+            const maxVal = Math.max(...data) * 1.2;
+            const width = container.offsetWidth || 400;
+            const height = 280;
+            const padding = 50;
+            
+            let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`;
+            
+            // 网格线
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (height - 2 * padding) * i / 5;
+                const val = Math.round(maxVal * (5 - i) / 5);
+                svg += `<line x1="${padding}" y1="${y}" x2="${width - padding}" y2="${y}" stroke="#f0f0f0" stroke-width="1"/>`;
+                svg += `<text x="${padding - 10}" y="${y + 4}" text-anchor="end" font-size="11" fill="#8c8c8c">${val}</text>`;
+            }
+            
+            // 折线
+            const points = data.map((val, idx) => {
+                const x = padding + (width - 2 * padding) * idx / (data.length - 1);
+                const y = padding + (height - 2 * padding) * (1 - val / maxVal);
+                return `${x},${y}`;
+            }).join(' ');
+            
+            svg += `<polyline points="${points}" fill="none" stroke="#0089FF" stroke-width="2.5"/>`;
+            
+            // 数据点
+            data.forEach((val, idx) => {
+                const x = padding + (width - 2 * padding) * idx / (data.length - 1);
+                const y = padding + (height - 2 * padding) * (1 - val / maxVal);
+                svg += `<circle cx="${x}" cy="${y}" r="4" fill="#0089FF"/>`;
+                svg += `<text x="${x}" y="${height - padding + 20}" text-anchor="middle" font-size="11" fill="#595959">${months[idx]}</text>`;
+            });
+            
+            svg += '</svg>';
+            container.innerHTML = svg;
+        }
+        
+        // 项目阶段分布饼图
+        function renderPhaseChart() {
+            const container = document.getElementById('phaseChart');
+            const data = [
+                { label: '需求调研', value: 15, color: '#0089FF' },
+                { label: '方案设计', value: 20, color: '#52c41a' },
+                { label: '设备制造', value: 30, color: '#faad14' },
+                { label: '安装调试', value: 25, color: '#ff4d4f' },
+                { label: '验收交付', value: 10, color: '#722ed1' }
+            ];
+            
+            const total = data.reduce((sum, d) => sum + d.value, 0);
+            const width = container.offsetWidth || 400;
+            const height = 280;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = 100;
+            
+            let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`;
+            
+            let startAngle = 0;
+            data.forEach((item, idx) => {
+                const angle = (item.value / total) * 2 * Math.PI;
+                const endAngle = startAngle + angle;
+                
+                const x1 = centerX + radius * Math.cos(startAngle);
+                const y1 = centerY + radius * Math.sin(startAngle);
+                const x2 = centerX + radius * Math.cos(endAngle);
+                const y2 = centerY + radius * Math.sin(endAngle);
+                
+                const largeArc = angle > Math.PI ? 1 : 0;
+                
+                svg += `<path d="M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z" fill="${item.color}" opacity="0.8"/>`;
+                
+                // 标签
+                const midAngle = startAngle + angle / 2;
+                const labelX = centerX + (radius + 30) * Math.cos(midAngle);
+                const labelY = centerY + (radius + 30) * Math.sin(midAngle);
+                svg += `<text x="${labelX}" y="${labelY}" text-anchor="middle" font-size="11" fill="#595959">${item.label} ${item.value}%</text>`;
+                
+                startAngle = endAngle;
+            });
+            
+            svg += '</svg>';
+            container.innerHTML = svg;
+        }
+        
+        // 区域业绩柱状图
+        function renderRegionChart() {
+            const container = document.getElementById('regionChart');
+            const data = [
+                { label: '华南', value: 850 },
+                { label: '华东', value: 720 },
+                { label: '华北', value: 580 },
+                { label: '西南', value: 420 },
+                { label: '华中', value: 350 }
+            ];
+            
+            const width = container.offsetWidth || 400;
+            const height = 280;
+            const padding = 50;
+            const maxVal = Math.max(...data.map(d => d.value)) * 1.2;
+            const barWidth = (width - 2 * padding) / data.length * 0.6;
+            const gap = (width - 2 * padding) / data.length;
+            
+            let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`;
+            
+            // 网格线
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height - 2 * padding) * i / 4;
+                const val = Math.round(maxVal * (4 - i) / 4);
+                svg += `<line x1="${padding}" y1="${y}" x2="${width - padding}" y2="${y}" stroke="#f0f0f0" stroke-width="1"/>`;
+                svg += `<text x="${padding - 10}" y="${y + 4}" text-anchor="end" font-size="11" fill="#8c8c8c">${val}</text>`;
+            }
+            
+            // 柱状
+            data.forEach((item, idx) => {
+                const x = padding + gap * idx + (gap - barWidth) / 2;
+                const barHeight = (height - 2 * padding) * (item.value / maxVal);
+                const y = height - padding - barHeight;
+                
+                svg += `<rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" fill="#0089FF" rx="3"/>`;
+                svg += `<text x="${x + barWidth/2}" y="${height - padding + 20}" text-anchor="middle" font-size="11" fill="#595959">${item.label}</text>`;
+                svg += `<text x="${x + barWidth/2}" y="${y - 5}" text-anchor="middle" font-size="11" fill="#595959">${item.value}</text>`;
+            });
+            
+            svg += '</svg>';
+            container.innerHTML = svg;
+        }
+        
+        // 客户行业分布环形图
+        function renderIndustryChart() {
+            const container = document.getElementById('industryChart');
+            const data = [
+                { label: '新能源', value: 35, color: '#0089FF' },
+                { label: '汽车零部件', value: 25, color: '#52c41a' },
+                { label: '家电', value: 20, color: '#faad14' },
+                { label: '3C电子', value: 15, color: '#ff4d4f' },
+                { label: '其他', value: 5, color: '#722ed1' }
+            ];
+            
+            const total = data.reduce((sum, d) => sum + d.value, 0);
+            const width = container.offsetWidth || 400;
+            const height = 280;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const outerRadius = 100;
+            const innerRadius = 60;
+            
+            let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`;
+            
+            let startAngle = -Math.PI / 2;
+            data.forEach((item) => {
+                const angle = (item.value / total) * 2 * Math.PI;
+                const endAngle = startAngle + angle;
+                
+                const x1o = centerX + outerRadius * Math.cos(startAngle);
+                const y1o = centerY + outerRadius * Math.sin(startAngle);
+                const x2o = centerX + outerRadius * Math.cos(endAngle);
+                const y2o = centerY + outerRadius * Math.sin(endAngle);
+                
+                const x1i = centerX + innerRadius * Math.cos(endAngle);
+                const y1i = centerY + innerRadius * Math.sin(endAngle);
+                const x2i = centerX + innerRadius * Math.cos(startAngle);
+                const y2i = centerY + innerRadius * Math.sin(startAngle);
+                
+                const largeArc = angle > Math.PI ? 1 : 0;
+                
+                svg += `<path d="M ${x1o} ${y1o} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${x2o} ${y2o} L ${x1i} ${y1i} A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${x2i} ${y2i} Z" fill="${item.color}" opacity="0.8"/>`;
+                
+                const midAngle = startAngle + angle / 2;
+                const labelX = centerX + (outerRadius + 30) * Math.cos(midAngle);
+                const labelY = centerY + (outerRadius + 30) * Math.sin(midAngle);
+                svg += `<text x="${labelX}" y="${labelY}" text-anchor="middle" font-size="11" fill="#595959">${item.label} ${item.value}%</text>`;
+                
+                startAngle = endAngle;
+            });
+            
+            // 中心文字
+            svg += `<text x="${centerX}" y="${centerY - 8}" text-anchor="middle" font-size="14" font-weight="600" fill="#262626">客户行业</text>`;
+            svg += `<text x="${centerX}" y="${centerY + 12}" text-anchor="middle" font-size="11" fill="#8c8c8c">分布占比</text>`;
+            
+            svg += '</svg>';
+            container.innerHTML = svg;
+        }
+        // 渲染审批列表
+        function renderApproval() {
+            const tbody = document.getElementById('approvalPendingBody');
+            tbody.innerHTML = approvalData.map((a, idx) => `
+                <tr>
+                    <td>${a.type}</td>
+                    <td>${a.applicant}</td>
+                    <td>${a.amount}</td>
+                    <td><span class="tag tag-warning">${a.status}</span></td>
+                    <td>${a.time}</td>
+                    <td><button class="btn btn-primary btn-sm" onclick="showApprovalDetail(${idx})">审批</button></td>
+                </tr>
+            `).join('');
+        }
+        
+        let currentApprovalIdx = null;
+        function showApprovalDetail(idx) {
+            currentApprovalIdx = idx;
+            const a = approvalData[idx];
+            document.getElementById('approvalDetailContent').innerHTML = `
+                <h3 style="margin-bottom: 16px;">${a.type}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                    <div><strong>申请人：</strong>${a.applicant}</div>
+                    <div><strong>金额：</strong>${a.amount}</div>
+                    <div><strong>申请时间：</strong>${a.time}</div>
+                    <div><strong>状态：</strong><span class="tag tag-warning">${a.status}</span></div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">申请说明</h4>
+                <p style="padding: 12px; background: var(--gray-1); border-radius: 4px; line-height: 1.6;">${a.detail}</p>
+            `;
+            openModal('approvalDetailModal');
+        }
+        
+        function handleApproval(action) {
+            if (currentApprovalIdx === null) return;
+            
+            const result = action === 'approve' ? '已同意' : '已拒绝';
+            showToast(`审批${result === '已同意' ? '通过' : '拒绝'}成功`);
+            
+            approvalData.splice(currentApprovalIdx, 1);
+            closeModal('approvalDetailModal');
+            renderApproval();
+            currentApprovalIdx = null;
+        }
+        
+        function switchApprovalTab(element, tabId) {
+            element.parentElement.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            
+            document.getElementById('approvalPending').classList.remove('active');
+            document.getElementById('approvalApproved').classList.remove('active');
+            document.getElementById('approvalInitiated').classList.remove('active');
+            document.getElementById('approval' + tabId.charAt(0).toUpperCase() + tabId.slice(1)).classList.add('active');
+        }
+        
+        // AI聊天
+        function toggleChat() {
+            document.getElementById('chatModal').classList.toggle('show');
+        }
+        
+        const aiResponses = {
+            '喷涂': '关于粉末喷涂工艺，建议关注以下要点：\n1. 前处理质量直接影响涂层附着力\n2. 喷涂电压控制在60-80KV范围\n3. 喷枪与工件距离保持150-250mm\n4. 粉末粒径分布影响流平效果',
+            '故障': '常见故障排查步骤：\n1. 检查电源和接地是否正常\n2. 查看控制面板是否有报警代码\n3. 检查气路和粉末输送系统\n4. 确认温控系统工作状态\n如需详细诊断，请提供具体故障现象。',
+            '备件': '备件库存查询结果：\n- 喷枪喷嘴：库存120个（充足）\n- 高压泵密封圈：库存35个（正常）\n- 粉末回收滤芯：库存18个（预警，建议补货）\n- 加热管：库存12个（预警）\n\n可通过"备件库存管理"模块查看详细清单。',
+            '工艺': '粉末涂装关键工艺参数：\n• 固化温度：180-200℃\n• 固化时间：15-20分钟\n• 涂层厚度：60-80μm\n• 烘烤升温速率：≤10℃/min\n\n不同材质和产品类型可能需要调整参数，建议参考具体工艺文档。',
+            'default': '感谢您的提问！我是泽亨实业的AI助手，可以帮您：\n\n• 查询技术文档和工艺参数\n• 诊断设备故障\n• 了解备件库存情况\n• 解答项目管理相关问题\n\n请问还有什么可以帮您的？'
+        };
+        
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // 添加用户消息
+            addChatMessage(message, 'user');
+            input.value = '';
+            
+            // 模拟AI回复
+            setTimeout(() => {
+                let response = aiResponses.default;
+                for (const [key, value] of Object.entries(aiResponses)) {
+                    if (key !== 'default' && message.includes(key)) {
+                        response = value;
+                        break;
+                    }
+                }
+                addChatMessage(response, 'ai');
+            }, 800);
+        }
+        
+        function addChatMessage(text, type) {
+            const container = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `chat-message ${type}`;
+            div.innerHTML = `<div class="chat-bubble">${text.replace(/\n/g, '<br>')}</div>`;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        // 表格排序
+        function sortTable(tableId, colIndex) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            const isAscending = table.dataset.sortOrder !== 'asc';
+            table.dataset.sortOrder = isAscending ? 'asc' : 'desc';
+            
+            rows.sort((a, b) => {
+                const aText = a.cells[colIndex].textContent.trim();
+                const bText = b.cells[colIndex].textContent.trim();
+                
+                const aNum = parseFloat(aText.replace(/[¥万,%]/g, ''));
+                const bNum = parseFloat(bText.replace(/[¥万,%]/g, ''));
+                
+                if (!isNaN(aNum) && !isNaN(bNum)) {
+                    return isAscending ? aNum - bNum : bNum - aNum;
+                }
+                
+                return isAscending ? aText.localeCompare(bText, 'zh-CN') : bText.localeCompare(aText, 'zh-CN');
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        // 初始化
+        window.addEventListener('load', () => {
+            renderProjects();
+            renderTickets();
+            renderInventory();
+            renderKnowledge(knowledgeData);
+        });
+        
+        // 点击模态框外部关闭
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

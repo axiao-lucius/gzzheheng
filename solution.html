@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州泽亨实业有限公司 - 数字化+AI升级解决方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #0089FF 0%, #0066CC 100%);
+            color: white;
+            padding: 12px 40px;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+        
+        .navbar-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px 40px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #0089FF 0%, #0066CC 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,137,255,0.3);
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 24px;
+        }
+        
+        .hero-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: #0089FF;
+            margin-bottom: 24px;
+            font-weight: 700;
+            border-left: 4px solid #0089FF;
+            padding-left: 16px;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: #333;
+            margin: 24px 0 16px;
+            font-weight: 600;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: #f8f9fb;
+            padding: 24px;
+            border-radius: 8px;
+            border-left: 3px solid #0089FF;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0089FF;
+            margin-bottom: 12px;
+        }
+        
+        .card-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .priority-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .matrix-quadrant {
+            padding: 24px;
+            border-radius: 8px;
+            min-height: 180px;
+        }
+        
+        .quadrant-high-high {
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFF0F0 100%);
+            border: 2px solid #FF6B6B;
+        }
+        
+        .quadrant-high-low {
+            background: linear-gradient(135deg, #FFF4E5 0%, #FFF8F0 100%);
+            border: 2px solid #FFA94D;
+        }
+        
+        .quadrant-low-high {
+            background: linear-gradient(135deg, #E5F3FF 0%, #F0F8FF 100%);
+            border: 2px solid #4DABF7;
+        }
+        
+        .quadrant-low-low {
+            background: linear-gradient(135deg, #F0F0F0 0%, #F8F8F8 100%);
+            border: 2px solid #CED4DA;
+        }
+        
+        .quadrant-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .quadrant-items {
+            list-style: none;
+            font-size: 14px;
+        }
+        
+        .quadrant-items li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .quadrant-items li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: inherit;
+        }
+        
+        .architecture-diagram {
+            background: linear-gradient(to bottom, #f8f9fb 0%, #ffffff 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .arch-layer {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .arch-layer-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .layer-intelligent {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border: 2px solid #0089FF;
+        }
+        
+        .layer-application {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+        }
+        
+        .layer-middle {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border: 2px solid #FF9800;
+        }
+        
+        .layer-base {
+            background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+            border: 2px solid #9C27B0;
+        }
+        
+        .arch-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .arch-component {
+            background: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #dee2e6;
+        }
+        
+        .arch-arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #0089FF;
+            margin: 10px 0;
+        }
+        
+        .scenario-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+        
+        .scenario-card:hover {
+            border-color: #0089FF;
+            box-shadow: 0 4px 16px rgba(0,137,255,0.15);
+        }
+        
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .scenario-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #0089FF 0%, #0066CC 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .scenario-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .scenario-section {
+            margin: 20px 0;
+        }
+        
+        .scenario-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0089FF;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .effect-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            color: #2E7D32;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 4px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #0089FF, #4CAF50, #FF9800);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 2px solid #e9ecef;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 4px solid #0089FF;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        
+        .timeline-phase {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0089FF;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-duration {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        
+        .timeline-tasks {
+            list-style: none;
+            font-size: 14px;
+        }
+        
+        .timeline-tasks li {
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .timeline-tasks li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0089FF;
+        }
+        
+        .roi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .roi-table th {
+            background: linear-gradient(135deg, #0089FF 0%, #0066CC 100%);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .roi-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+        
+        .roi-table tr:nth-child(even) {
+            background: #f8f9fb;
+        }
+        
+        .roi-highlight {
+            color: #0089FF;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .advantage-item {
+            background: linear-gradient(135deg, #f8f9fb 0%, #ffffff 100%);
+            padding: 24px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .advantage-item:hover {
+            border-color: #0089FF;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,137,255,0.15);
+        }
+        
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #0089FF 0%, #0066CC 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .advantage-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .advantage-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .footer-company {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .priority-matrix {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 50px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+        
+        @media print {
+            .navbar {
+                display: none;
+            }
+            
+            .container {
+                padding-top: 20px;
+            }
+            
+            .section {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-title">广州泽亨实业 · 数字化+AI升级方案</div>
+            <div class="navbar-links">
+                <a href="#diagnosis">现状诊断</a>
+                <a href="#overview">方案总览</a>
+                <a href="#scenarios">应用场景</a>
+                <a href="#roadmap">实施路线</a>
+                <a href="#roi">ROI预估</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h1>数字化+AI升级解决方案</h1>
+            <div class="hero-subtitle">基于钉钉生态 · 集成不替换 · AI原生赋能</div>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span>📅</span>
+                    <span>2026年专属定制方案</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>🏢</span>
+                    <span>国家级专精特新小巨人企业</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span>🎯</span>
+                    <span>智能化粉末涂装整体解决方案</span>
+                </div>
+            </div>
+        </div>
+
+        <section id="diagnosis" class="section">
+            <h2 class="section-title">一、客户现状诊断</h2>
+            
+            <div class="section-subtitle">1.1 信息化现状总结</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">现有核心系统</div>
+                    <div class="card-content">
+                        • Zmart+数字化平台（业务中枢）<br>
+                        • KS60/KS50中央控制系统<br>
+                        • MES接口模块<br>
+                        • ZmarTest检测仪<br>
+                        • 3D激光扫描喷涂系统<br>
+                        • SIEMENS/AB控制系统
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">技术资产积累</div>
+                    <div class="card-content">
+                        • 12项软件著作权<br>
+                        • 300+专利技术<br>
+                        • 成熟的设备+软件+系统能力<br>
+                        • 8个服务中心网络
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">企业规模与产能</div>
+                    <div class="card-content">
+                        • 员工规模：100-499人<br>
+                        • 年产值：约1.5亿元<br>
+                        • 项目制交付模式<br>
+                        • 上下游供应链协同需求强烈
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-subtitle">1.2 核心痛点提炼</div>
+            <div class="priority-matrix">
+                <div class="matrix-quadrant quadrant-high-high">
+                    <div class="quadrant-label" style="color: #D32F2F;">🔴 高影响 × 高紧迫</div>
+                    <ul class="quadrant-items">
+                        <li>多系统数据孤岛，信息无法互通</li>
+                        <li>项目制交付管理缺失，进度难追踪</li>
+                        <li>业财一体化程度低，财务核算效率低下</li>
+                    </ul>
+                </div>
+                <div class="matrix-quadrant quadrant-high-low">
+                    <div class="quadrant-label" style="color: #F57C00;">🟠 高影响 × 中紧迫</div>
+                    <ul class="quadrant-items">
+                        <li>售后服务平台缺失，8个中心协同困难</li>
+                        <li>协同办公平台缺失或不统一</li>
+                        <li>数据资产化能力薄弱，知识沉淀不足</li>
+                    </ul>
+                </div>
+                <div class="matrix-quadrant quadrant-low-high">
+                    <div class="quadrant-label" style="color: #1976D2;">🔵 中影响 × 高紧迫</div>
+                    <ul class="quadrant-items">
+                        <li>研发知识传承断层风险</li>
+                        <li>供应商协同信息流不畅</li>
+                    </ul>
+                </div>
+                <div class="matrix-quadrant quadrant-low-low">
+                    <div class="quadrant-label" style="color: #757575;">⚪ 中影响 × 中紧迫</div>
+                    <ul class="quadrant-items">
+                        <li>备件管理依赖人工经验</li>
+                        <li>质量追溯体系不完善</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview" class="section">
+            <h2 class="section-title">二、解决方案总览</h2>
+            
+            <div class="section-subtitle">2.1 四层融合架构</div>
+            <div class="architecture-diagram">
+                <div class="arch-layer layer-intelligent">
+                    <div class="arch-layer-title">
+                        <span>🧠</span>
+                        <span>智能层：悟空AI Agent</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">智能问答助手</div>
+                        <div class="arch-component">数据分析Agent</div>
+                        <div class="arch-component">知识沉淀引擎</div>
+                        <div class="arch-component">辅助决策大脑</div>
+                        <div class="arch-component">自然语言查询</div>
+                    </div>
+                </div>
+                
+                <div class="arch-arrow">⬇️ ⬆️</div>
+                
+                <div class="arch-layer layer-application">
+                    <div class="arch-layer-title">
+                        <span>📱</span>
+                        <span>应用层：钉钉AI表格 + 宜搭低代码</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">项目管理应用</div>
+                        <div class="arch-component">售后服务工单</div>
+                        <div class="arch-component">客户CRM</div>
+                        <div class="arch-component">备件管理库</div>
+                        <div class="arch-component">质量追溯系统</div>
+                        <div class="arch-component">供应商协同平台</div>
+                        <div class="arch-component">业财一体化看板</div>
+                        <div class="arch-component">审批流程引擎</div>
+                    </div>
+                </div>
+                
+                <div class="arch-arrow">⬇️ ⬆️</div>
+                
+                <div class="arch-layer layer-middle">
+                    <div class="arch-layer-title">
+                        <span>🔗</span>
+                        <span>中间层：钉钉底座 + 连接器</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">钉钉统一身份认证</div>
+                        <div class="arch-component">API连接器（Zmart+/KS/MES）</div>
+                        <div class="arch-component">数据同步引擎</div>
+                        <div class="arch-component">消息通知中心</div>
+                        <div class="arch-component">权限管理体系</div>
+                    </div>
+                </div>
+                
+                <div class="arch-arrow">⬇️ ⬆️</div>
+                
+                <div class="arch-layer layer-base">
+                    <div class="arch-layer-title">
+                        <span>🏗️</span>
+                        <span>底层：现有系统保留（集成不替换）</span>
+                    </div>
+                    <div class="arch-components">
+                        <div class="arch-component">Zmart+数字化平台</div>
+                        <div class="arch-component">KS60/KS50中央控制系统</div>
+                        <div class="arch-component">MES接口模块</div>
+                        <div class="arch-component">ZmarTest检测仪</div>
+                        <div class="arch-component">3D激光扫描喷涂系统</div>
+                        <div class="arch-component">SIEMENS/AB控制系统</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-subtitle">2.2 核心价值主张</div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-title">💡 集成不替换</div>
+                    <div class="card-content">
+                        尊重泽亨现有投资，通过API连接器打通Zmart+、KS系统等已有平台，避免重复建设，保护300+专利和12项软著的技术资产。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚡ 敏捷落地</div>
+                    <div class="card-content">
+                        依托钉钉宜搭低代码平台，快速搭建业务应用，无需大量开发资源，2-4周即可上线核心场景，边用边迭代。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🤖 AI原生赋能</div>
+                    <div class="card-content">
+                        悟空AI深度融入业务流程，实现智能问答、自动数据分析、知识自动沉淀，让AI成为每个员工的得力助手。
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔒 安全合规</div>
+                    <div class="card-content">
+                        基于阿里云基础设施，符合等保三级要求，数据加密传输存储，支持私有化部署选项，满足专精特新企业数据安全需求。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="scenarios" class="section">
+            <h2 class="section-title">三、五大核心应用场景</h2>
+
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">1</div>
+                    <div class="scenario-title">项目全生命周期管理</div>
+                </div>
+                
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🎯 痛点描述</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        泽亨采用项目制交付模式，但缺乏统一的项目管理平台。项目进度依赖Excel和口头沟通，跨部门协作效率低，里程碑节点易遗漏，成本核算滞后，客户无法实时了解项目进展。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🏗️ 方案架构</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        <strong>钉钉AI表格</strong>作为项目数据中枢，存储项目基本信息、里程碑、成员分配；<strong>宜搭</strong>搭建项目管理应用，实现任务分配、进度跟踪、文档关联、审批流转；<strong>悟空AI</strong>提供项目风险预警和智能报告生成。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">✅ 功能清单</div>
+                    <ul class="feature-list">
+                        <li>项目立项审批流程（宜搭表单+审批）</li>
+                        <li>项目WBS分解与任务分配（AI表格多维视图）</li>
+                        <li>里程碑节点自动提醒（钉钉消息推送）</li>
+                        <li>项目成本实时核算（对接财务数据）</li>
+                        <li>甘特图可视化展示（AI表格图表组件）</li>
+                        <li>项目文档集中管理（关联钉钉云盘）</li>
+                        <li>客户门户查看项目进度（宜搭外部联系人）</li>
+                        <li>悟空AI自动生成项目周报/月报</li>
+                    </ul>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">📊 预期效果</div>
+                    <div>
+                        <span class="effect-badge">项目交付周期缩短 20%</span>
+                        <span class="effect-badge">跨部门协作效率提升 35%</span>
+                        <span class="effect-badge">项目成本偏差率降低至 5%以内</span>
+                        <span class="effect-badge">客户满意度提升 25%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">2</div>
+                    <div class="scenario-title">售后服务数字化</div>
+                </div>
+                
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🎯 痛点描述</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        泽亨拥有8个服务中心，但缺乏统一的售后服务平台。工单派发依赖电话/微信，响应时效难以监控，备件库存信息不透明，工程师经验无法沉淀，客户反馈分散在各渠道，服务质量参差不齐。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🏗️ 方案架构</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        <strong>宜搭</strong>搭建售后服务工单系统，支持多渠道接入（钉钉/电话/邮件）；<strong>AI表格</strong>建立备件管理库，实现库存实时查询和智能补货提醒；<strong>悟空AI</strong>构建售后知识库，工程师可通过自然语言查询故障解决方案，AI自动推荐历史案例。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">✅ 功能清单</div>
+                    <ul class="feature-list">
+                        <li>多渠道工单接入与自动分派（宜搭表单）</li>
+                        <li>SLA时效监控与超时预警（钉钉机器人）</li>
+                        <li>工程师移动端接单与现场签到（宜搭移动应用）</li>
+                        <li>备件库存实时查询与调拨申请（AI表格）</li>
+                        <li>故障知识库智能检索（悟空AI问答）</li>
+                        <li>服务评价与客户反馈收集（宜搭表单）</li>
+                        <li>服务中心绩效看板（AI表格仪表盘）</li>
+                        <li>常见故障自动分类与路由（悟空AI）</li>
+                    </ul>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">📊 预期效果</div>
+                    <div>
+                        <span class="effect-badge">工单响应时间缩短 40%</span>
+                        <span class="effect-badge">首次修复率提升 30%</span>
+                        <span class="effect-badge">备件库存周转率提升 25%</span>
+                        <span class="effect-badge">客户满意度提升至 95%+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">3</div>
+                    <div class="scenario-title">研发知识沉淀与传承</div>
+                </div>
+                
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🎯 痛点描述</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        泽亨拥有300+专利和12项软著，但研发知识分散在个人电脑、纸质文档和老员工脑中。新员工上手周期长，关键技术经验难以传承，重复研发现象时有发生，知识产权保护存在风险。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🏗️ 方案架构</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        <strong>AI表格</strong>建立研发知识库，结构化存储专利文档、技术方案、测试报告；<strong>悟空AI</strong>构建智能问答系统，支持自然语言检索技术文档，自动提取关键信息，生成知识图谱；<strong>宜搭</strong>搭建研发项目管理流程，实现技术评审和知识审核机制。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">✅ 功能清单</div>
+                    <ul class="feature-list">
+                        <li>专利与技术文档集中管理（AI表格）</li>
+                        <li>智能语义检索（悟空AI自然语言查询）</li>
+                        <li>技术方案自动摘要生成（悟空AI）</li>
+                        <li>相似案例智能推荐（悟空AI）</li>
+                        <li>研发经验自动沉淀（会议纪要转知识库）</li>
+                        <li>技术评审流程（宜搭审批）</li>
+                        <li>知识贡献激励机制（积分体系）</li>
+                        <li>知识产权预警（专利到期提醒）</li>
+                    </ul>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">📊 预期效果</div>
+                    <div>
+                        <span class="effect-badge">新员工上手周期缩短 50%</span>
+                        <span class="effect-badge">重复研发减少 35%</span>
+                        <span class="effect-badge">知识检索效率提升 70%</span>
+                        <span class="effect-badge">技术创新提案增加 40%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">4</div>
+                    <div class="scenario-title">业财一体化看板</div>
+                </div>
+                
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🎯 痛点描述</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        泽亨业财一体化程度低，财务核算依赖手工录入和Excel汇总，数据滞后且易出错。项目成本归集不及时，收入确认与交付进度脱节，管理层无法实时掌握经营状况，预算执行监控困难。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🏗️ 方案架构</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        <strong>AI表格</strong>作为业财数据中枢，对接财务系统和业务系统数据；<strong>宜搭</strong>搭建费用报销、合同审批、付款申请等流程；<strong>悟空AI</strong>提供智能财务分析，自动生成经营报表，识别异常数据，辅助决策。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">✅ 功能清单</div>
+                    <ul class="feature-list">
+                        <li>费用报销在线审批（宜搭表单+审批流）</li>
+                        <li>合同管理与付款计划（AI表格）</li>
+                        <li>项目成本实时归集（对接财务系统）</li>
+                        <li>收入确认自动化（关联项目交付进度）</li>
+                        <li>经营数据实时看板（AI表格仪表盘）</li>
+                        <li>预算执行监控与预警（钉钉机器人）</li>
+                        <li>财务报表自动生成（悟空AI）</li>
+                        <li>异常数据智能识别（悟空AI风控）</li>
+                    </ul>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">📊 预期效果</div>
+                    <div>
+                        <span class="effect-badge">财务核算效率提升 60%</span>
+                        <span class="effect-badge">报销审批周期缩短 50%</span>
+                        <span class="effect-badge">成本核算准确率提升至 98%+</span>
+                        <span class="effect-badge">管理层决策响应速度提升 40%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario-card">
+                <div class="scenario-header">
+                    <div class="scenario-number">5</div>
+                    <div class="scenario-title">供应链协同平台</div>
+                </div>
+                
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🎯 痛点描述</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        泽亨上下游供应链信息流不畅，供应商资质管理分散，采购订单跟踪依赖人工沟通，交货期和质量问题反馈滞后，对账结算周期长，缺乏统一的供应商评价体系。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">🏗️ 方案架构</div>
+                    <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                        <strong>宜搭</strong>搭建供应商门户，支持供应商自助注册、资质上传、报价提交；<strong>AI表格</strong>建立供应商数据库和采购订单跟踪表；<strong>悟空AI</strong>提供供应商智能评估和风险预警，优化采购决策。
+                    </p>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">✅ 功能清单</div>
+                    <ul class="feature-list">
+                        <li>供应商自助注册与资质管理（宜搭外部联系人）</li>
+                        <li>在线询价与报价对比（宜搭表单）</li>
+                        <li>采购订单跟踪与交货提醒（AI表格）</li>
+                        <li>来料质检记录与不合格品处理（宜搭）</li>
+                        <li>供应商绩效评价体系（AI表格评分）</li>
+                        <li>对账结算在线化（宜搭审批）</li>
+                        <li>供应商风险预警（悟空AI）</li>
+                        <li>采购数据分析与优化建议（悟空AI）</li>
+                    </ul>
+                </div>
+
+                <div class="scenario-section">
+                    <div class="scenario-section-title">📊 预期效果</div>
+                    <div>
+                        <span class="effect-badge">采购周期缩短 30%</span>
+                        <span class="effect-badge">供应商协作效率提升 45%</span>
+                        <span class="effect-badge">对账结算周期缩短 50%</span>
+                        <span class="effect-badge">采购成本降低 8-12%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <h2 class="section-title">四、实施路线图</h2>
+            
+            <div class="section-subtitle">分三期推进，每期3-6个月，循序渐进实现数字化转型</div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">第一期：基础连接与核心应用</div>
+                        <div class="timeline-duration">周期：3-4个月 | 重点：打通数据孤岛，建立统一平台</div>
+                        <ul class="timeline-tasks">
+                            <li>钉钉组织架构搭建与全员入驻</li>
+                            <li>API连接器部署（对接Zmart+/KS/MES系统）</li>
+                            <li>项目管理应用上线（宜搭+AI表格）</li>
+                            <li>售后服务工单系统试点（2个服务中心）</li>
+                            <li>基础数据迁移与清洗</li>
+                            <li>用户培训与推广</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">第二期：核心应用深化与扩展</div>
+                        <div class="timeline-duration">周期：4-5个月 | 重点：全面覆盖业务场景</div>
+                        <ul class="timeline-tasks">
+                            <li>售后服务系统全中心推广（8个服务中心）</li>
+                            <li>业财一体化看板上线</li>
+                            <li>供应链协同平台搭建</li>
+                            <li>研发知识库建设（首批100+专利入库）</li>
+                            <li>悟空AI智能问答初步部署</li>
+                            <li>流程优化与迭代</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-phase">第三期：AI深化与数据资产化</div>
+                        <div class="timeline-duration">周期：5-6个月 | 重点：AI赋能，数据驱动决策</div>
+                        <ul class="timeline-tasks">
+                            <li>悟空AI深度集成（智能分析/辅助决策）</li>
+                            <li>研发知识图谱构建完成</li>
+                            <li>智能报表与预测分析上线</li>
+                            <li>数据资产管理体系建立</li>
+                            <li>高级自动化流程（RPA+AI）</li>
+                            <li>持续优化与能力沉淀</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roi" class="section">
+            <h2 class="section-title">五、ROI预估</h2>
+            
+            <div class="section-subtitle">量化价值评估（基于行业基准与泽亨实际情况）</div>
+            
+            <table class="roi-table">
+                <thead>
+                    <tr>
+                        <th>价值维度</th>
+                        <th>当前状态</th>
+                        <th>目标状态</th>
+                        <th>提升幅度</th>
+                        <th>年化价值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>项目交付效率</strong></td>
+                        <td>平均交付周期长，进度不透明</td>
+                        <td>交付周期缩短20%，全程可视化</td>
+                        <td class="roi-highlight">↑ 20%</td>
+                        <td>节省人力成本约 <span class="roi-highlight">120万元</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>售后服务响应</strong></td>
+                        <td>工单响应慢，8中心协同难</td>
+                        <td>响应时间缩短40%，首次修复率提升</td>
+                        <td class="roi-highlight">↑ 40%</td>
+                        <td>减少重复上门成本约 <span class="roi-highlight">80万元</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>财务核算效率</strong></td>
+                        <td>手工录入，数据滞后易出错</td>
+                        <td>自动化核算，实时准确</td>
+                        <td class="roi-highlight">↑ 60%</td>
+                        <td>节省财务人力约 <span class="roi-highlight">60万元</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>采购成本优化</strong></td>
+                        <td>供应商管理分散，议价能力弱</td>
+                        <td>集中采购，智能比价</td>
+                        <td class="roi-highlight">↓ 8-12%</td>
+                        <td>年节约采购成本约 <span class="roi-highlight">100-150万元</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>研发知识复用</strong></td>
+                        <td>知识分散，重复研发多</td>
+                        <td>知识集中管理，智能检索</td>
+                        <td class="roi-highlight">↑ 35%</td>
+                        <td>减少重复研发投入约 <span class="roi-highlight">90万元</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>客户满意度</strong></td>
+                        <td>信息不透明，反馈渠道少</td>
+                        <td>实时可视，多渠道互动</td>
+                        <td class="roi-highlight">↑ 25%</td>
+                        <td>促进复购与口碑传播，增收约 <span class="roi-highlight">200万元</span></td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); font-weight: 600;">
+                        <td colspan="4"><strong>合计年化价值</strong></td>
+                        <td class="roi-highlight" style="font-size: 18px;">650-700万元</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card-grid" style="margin-top: 30px;">
+                <div class="card">
+                    <div class="card-title">💰 投资回报周期</div>
+                    <div class="card-content">
+                        预计总投资回收期：<strong>12-18个月</strong><br>
+                        首期投入后6个月即可看到明显效果<br>
+                        三年累计ROI预计超过 <strong>300%</strong>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 隐性价值</div>
+                    <div class="card-content">
+                        • 数据资产沉淀，支撑未来IPO或融资<br>
+                        • 组织能力升级，吸引优秀人才<br>
+                        • 品牌形象提升，增强客户信任<br>
+                        • 合规风险降低，满足监管要求
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">六、为什么选择钉钉生态</h2>
+            
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔒</div>
+                    <div class="advantage-title">安全合规</div>
+                    <div class="advantage-desc">
+                        基于阿里云基础设施，通过等保三级认证，数据加密传输存储，支持私有化部署，符合专精特新企业数据安全要求
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔗</div>
+                    <div class="advantage-title">开放集成</div>
+                    <div class="advantage-desc">
+                        丰富的API生态，无缝对接Zmart+、KS系统、MES等现有平台，保护既有投资，避免推倒重来
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">🤖</div>
+                    <div class="advantage-title">AI原生</div>
+                    <div class="advantage-desc">
+                        悟空AI深度集成，从第一天起就具备智能能力，无需额外开发，让每个员工都拥有AI助手
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">⚡</div>
+                    <div class="advantage-title">低代码敏捷</div>
+                    <div class="advantage-desc">
+                        宜搭低代码平台，业务人员即可搭建应用，2-4周快速上线，边用边迭代，适应业务变化
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">👥</div>
+                    <div class="advantage-title">统一协同</div>
+                    <div class="advantage-desc">
+                        钉钉作为统一入口，整合IM、邮件、日程、文档、审批，消除多平台切换，提升协作效率
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">📊</div>
+                    <div class="advantage-title">数据驱动</div>
+                    <div class="advantage-desc">
+                        AI表格提供强大的数据分析能力，实时仪表盘，智能洞察，让数据真正成为决策依据
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <div class="footer-text">本方案为广州泽亨实业有限公司专属定制，基于钉钉生态打造数字化+AI升级路径</div>
+            <div class="footer-company">© 2026 悟空AI | 广州泽亨实业有限公司专属方案</div>
+        </div>
+    </div>
+</body>
+</html>
