@@ -31,17 +31,17 @@
   --bad:  #e0445a;
   --grad: linear-gradient(135deg,#0089FF,#0066CC 55%,#00AAFF);
   --grad-soft: linear-gradient(135deg,#eef6ff,#ecf4ff 55%,#f0f8ff);
-  --radius: 18px;
-  --radius-sm: 12px;
-  --radius-lg: 26px;
-  --shadow: 0 10px 30px rgba(18,24,40,.08), 0 2px 6px rgba(18,24,40,.04);
-  --shadow-lg: 0 24px 60px rgba(18,24,40,.14), 0 6px 16px rgba(18,24,40,.06);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-lg: 21px;
+  --shadow: 0 8px 24px rgba(18,24,40,.08), 0 2px 5px rgba(18,24,40,.04);
+  --shadow-lg: 0 19px 48px rgba(18,24,40,.14), 0 5px 13px rgba(18,24,40,.06);
   --font-sans: 'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
   --font-serif: 'Playfair Display','Noto Serif SC',Georgia,serif;
   --font-mono: 'JetBrains Mono','IBM Plex Mono',SFMono-Regular,Menlo,monospace;
   --font-display: var(--font-sans);
-  --letter-tight: -.03em;
-  --letter-normal: -.01em;
+  --letter-tight: -.024em;
+  --letter-normal: -.0.8em;
   --ease: cubic-bezier(.4,0,.2,1);
 }
 
@@ -55,89 +55,89 @@ a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code,kbd,pre,samp{font-family:var(--font-mono)}
 
-.deck{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(100vw,calc(100vh * 16 / 9));height:min(100vh,calc(100vw * 9 / 16));overflow:hidden;background:var(--bg);box-shadow:0 0 60px rgba(0,0,0,.08)}
+.deck{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(100vw,calc(100vh * 16 / 9));height:min(100vh,calc(100vw * 9 / 16));overflow:hidden;background:var(--bg);box-shadow:0 0 48px rgba(0,0,0,.08)}
 .slide{
   position:absolute;inset:0;
   display:flex;flex-direction:column;justify-content:center;
-  padding:72px 96px;
+  padding:58px 77px;
   box-sizing:border-box;
   opacity:0;pointer-events:none;
   transition:opacity .5s var(--ease), transform .5s var(--ease);
-  transform:translateX(30px);
+  transform:translateX(24px);
   overflow:hidden;
 }
 .slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:2}
-.slide.is-prev{transform:translateX(-30px)}
+.slide.is-prev{transform:translateX(-24px)}
 
-.eyebrow{font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
-.kicker{font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
-h1.title,.h1{font-family:var(--font-display);font-size:72px;line-height:1.05;font-weight:800;letter-spacing:var(--letter-tight);margin:0 0 18px;color:var(--text-1)}
-h2.title,.h2{font-family:var(--font-display);font-size:54px;line-height:1.1;font-weight:700;letter-spacing:var(--letter-tight);margin:0 0 14px}
-h3,.h3{font-size:32px;line-height:1.2;font-weight:600;letter-spacing:var(--letter-normal);margin:0 0 10px}
-h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
-.lede{font-size:22px;line-height:1.55;color:var(--text-2);font-weight:300;max-width:62ch}
+.eyebrow{font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3)}
+.kicker{font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+h1.title,.h1{font-family:var(--font-display);font-size:58px;line-height:1.05;font-weight:800;letter-spacing:var(--letter-tight);margin:0 0 14px;color:var(--text-1)}
+h2.title,.h2{font-family:var(--font-display);font-size:43px;line-height:1.1;font-weight:700;letter-spacing:var(--letter-tight);margin:0 0 11px}
+h3,.h3{font-size:26px;line-height:1.2;font-weight:600;letter-spacing:var(--letter-normal);margin:0 0 8px}
+h4,.h4{font-size:18px;line-height:1.3;font-weight:600;margin:0 0 6px}
+.lede{font-size:18px;line-height:1.55;color:var(--text-2);font-weight:300;max-width:62ch}
 .dim{color:var(--text-2)}
 .dim2{color:var(--text-3)}
 .mono{font-family:var(--font-mono)}
 .serif{font-family:var(--font-serif)}
 .gradient-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 
-.stack>*+*{margin-top:14px}
-.row{display:flex;gap:24px;align-items:center}
+.stack>*+*{margin-top:11px}
+.row{display:flex;gap:19px;align-items:center}
 .row.wrap{flex-wrap:wrap}
-.grid{display:grid;gap:24px}
+.grid{display:grid;gap:19px}
 .g2{grid-template-columns:repeat(2,1fr)}
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
 .center{display:flex;align-items:center;justify-content:center;text-align:center}
 .fill{flex:1}
-.sp-t{padding-top:24px}.sp-b{padding-bottom:24px}
-.mt-s{margin-top:8px}.mt-m{margin-top:18px}.mt-l{margin-top:32px}
-.mb-s{margin-bottom:8px}.mb-m{margin-bottom:18px}.mb-l{margin-bottom:32px}
+.sp-t{padding-top:19px}.sp-b{padding-bottom:19px}
+.mt-s{margin-top:6px}.mt-m{margin-top:14px}.mt-l{margin-top:26px}
+.mb-s{margin-bottom:6px}.mb-m{margin-bottom:14px}.mb-l{margin-bottom:26px}
 
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:26px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  padding:21px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .card-soft{background:var(--surface-2);border:1px solid var(--border)}
-.card-outline{background:transparent;border:1.5px solid var(--border-strong);box-shadow:none}
-.card-accent{background:var(--surface);border-top:3px solid var(--accent)}
+.card-outline{background:transparent;border:1px solid var(--border-strong);box-shadow:none}
+.card-accent{background:var(--surface);border-top:2px solid var(--accent)}
 .card-hover{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.card-hover:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card-hover:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 
-.pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:500;
+.pill{display:inline-block;padding:3px 10px;border-radius:799px;font-size:10px;font-weight:500;
   background:var(--surface-2);color:var(--text-2);border:1px solid var(--border)}
 .pill-accent{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);border-color:color-mix(in srgb,var(--accent) 28%,transparent)}
 
 .divider{height:1px;background:var(--border);width:100%}
-.divider-accent{height:3px;width:72px;background:var(--accent);border-radius:2px}
+.divider-accent{height:2px;width:58px;background:var(--accent);border-radius:2px}
 
-.deck-header{position:absolute;top:24px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;
-  font-size:12px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;z-index:10;pointer-events:none}
-.deck-footer{position:absolute;bottom:24px;left:40px;right:40px;display:flex;align-items:center;justify-content:space-between;
-  font-size:12px;color:var(--text-3);z-index:10;pointer-events:none}
+.deck-header{position:absolute;top:19px;left:32px;right:32px;display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--text-3);letter-spacing:.10em;text-transform:uppercase;z-index:10;pointer-events:none}
+.deck-footer{position:absolute;bottom:19px;left:32px;right:32px;display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;color:var(--text-3);z-index:10;pointer-events:none}
 .slide-number::before{content:attr(data-current)}
 .slide-number::after{content:" / " attr(data-total)}
-.progress-bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:transparent;z-index:20}
+.progress-bar{position:fixed;left:0;right:0;bottom:0;height:2px;background:transparent;z-index:20}
 .progress-bar > span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s var(--ease)}
 
 .notes{display:none!important}
 .notes-overlay{position:fixed;inset:auto 0 0 0;max-height:42vh;background:rgba(20,22,30,.95);color:#e8ebf4;
-  padding:20px 32px;font-size:16px;line-height:1.6;border-top:1px solid rgba(255,255,255,.1);transform:translateY(100%);
+  padding:16px 26px;font-size:13px;line-height:1.6;border-top:1px solid rgba(255,255,255,.1);transform:translateY(100%);
   transition:transform .3s var(--ease);z-index:40;overflow:auto;font-family:var(--font-sans)}
 .notes-overlay.open{transform:translateY(0)}
-.overview{position:fixed;inset:0;background:rgba(10,12,18,.92);backdrop-filter:blur(12px);z-index:50;
-  display:none;padding:40px;overflow:auto}
-.overview.open{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-content:start}
-.overview .thumb{background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  aspect-ratio:16/9;overflow:hidden;cursor:pointer;position:relative;color:var(--text-1);padding:16px;
-  font-size:11px;transition:transform .2s var(--ease)}
+.overview{position:fixed;inset:0;background:rgba(10,12,18,.92);backdrop-filter:blur(10px);z-index:50;
+  display:none;padding:32px;overflow:auto}
+.overview.open{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-content:start}
+.overview .thumb{background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  aspect-ratio:16/9;overflow:hidden;cursor:pointer;position:relative;color:var(--text-1);padding:13px;
+  font-size:9px;transition:transform .2s var(--ease)}
 .overview .thumb:hover{transform:scale(1.04)}
-.overview .thumb .n{position:absolute;top:8px;left:10px;font-weight:700;font-size:14px;color:var(--text-3)}
-.overview .thumb .t{position:absolute;bottom:10px;left:14px;right:14px;font-weight:600;color:var(--text-1)}
+.overview .thumb .n{position:absolute;top:6px;left:8px;font-weight:700;font-size:11px;color:var(--text-3)}
+.overview .thumb .t{position:absolute;bottom:8px;left:11px;right:11px;font-weight:600;color:var(--text-1)}
 
 .hidden{display:none!important}
 .nowrap{white-space:nowrap}
 .tr{text-align:right}.tc{text-align:center}.tl{text-align:left}
-.uppercase{text-transform:uppercase;letter-spacing:.12em}
+.uppercase{text-transform:uppercase;letter-spacing:.10em}
 
 @media print{
   .slide{position:relative;opacity:1!important;transform:none!important;page-break-after:always;height:auto;min-height:56.25vw}
@@ -153,102 +153,102 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
   --accent:#0089FF;--accent-2:#0066CC;--accent-3:#00AAFF;
   --grad:linear-gradient(135deg,#0089FF 0%,#0066CC 55%,#00AAFF 100%);
   --grad-soft:linear-gradient(135deg,#eef6ff,#ecf4ff 55%,#f0f8ff);
-  --radius:20px;--radius-lg:28px;
-  --shadow:0 14px 40px rgba(20,25,60,.08),0 2px 8px rgba(20,25,60,.04);
+  --radius:16px;--radius-lg:22px;
+  --shadow:0 11px 32px rgba(20,25,60,.08),0 2px 6px rgba(20,25,60,.04);
   font-family:'Inter','Noto Sans SC',sans-serif;
 }
-.tpl-pitch-deck .slide{padding:88px 112px}
+.tpl-pitch-deck .slide{padding:70px 90px}
 .tpl-pitch-deck .kicker{color:var(--accent);font-weight:700}
-.tpl-pitch-deck .h1{font-size:86px;line-height:1.02;font-weight:900;letter-spacing:-.035em}
-.tpl-pitch-deck .h2{font-size:62px;font-weight:800;letter-spacing:-.03em}
-.tpl-pitch-deck .mega{font-size:180px;font-weight:900;line-height:.95;letter-spacing:-.05em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.tpl-pitch-deck .mega-sub{font-size:28px;color:var(--text-2);margin-top:18px}
+.tpl-pitch-deck .h1{font-size:69px;line-height:1.02;font-weight:900;letter-spacing:-.028em}
+.tpl-pitch-deck .h2{font-size:50px;font-weight:800;letter-spacing:-.024em}
+.tpl-pitch-deck .mega{font-size:144px;font-weight:900;line-height:.95;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tpl-pitch-deck .mega-sub{font-size:22px;color:var(--text-2);margin-top:14px}
 .tpl-pitch-deck .cover-bg{position:absolute;inset:0;background:var(--grad-soft);z-index:-1}
-.tpl-pitch-deck .cover-blob{position:absolute;right:-140px;top:-140px;width:560px;height:560px;border-radius:50%;background:var(--grad);filter:blur(8px);opacity:.35;z-index:-1}
-.tpl-pitch-deck .brand-dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--grad);margin-right:10px;vertical-align:middle}
-.tpl-pitch-deck .brand{font-weight:800;font-size:22px;letter-spacing:-.02em}
+.tpl-pitch-deck .cover-blob{position:absolute;right:-112px;top:-112px;width:448px;height:448px;border-radius:50%;background:var(--grad);filter:blur(6px);opacity:.35;z-index:-1}
+.tpl-pitch-deck .brand-dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--grad);margin-right:8px;vertical-align:middle}
+.tpl-pitch-deck .brand{font-weight:800;font-size:18px;letter-spacing:-.016em}
 .tpl-pitch-deck .card{border-radius:var(--radius)}
-.tpl-pitch-deck .num-tag{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.12em}
-.tpl-pitch-deck .big-q{font-family:'Playfair Display',serif;font-size:56px;line-height:1.15;font-weight:700;letter-spacing:-.02em;max-width:22ch}
-.tpl-pitch-deck .metric{display:flex;flex-direction:column;gap:6px}
-.tpl-pitch-deck .metric .n{font-size:72px;font-weight:900;letter-spacing:-.035em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
-.tpl-pitch-deck .metric .l{color:var(--text-2);font-size:16px}
-.tpl-pitch-deck .team-card{text-align:center;padding:32px 20px}
-.tpl-pitch-deck .avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:32px}
-.tpl-pitch-deck .ask-box{background:var(--grad);color:#fff;padding:56px 64px;border-radius:var(--radius-lg);box-shadow:0 30px 70px rgba(0,137,255,.35)}
+.tpl-pitch-deck .num-tag{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.10em}
+.tpl-pitch-deck .big-q{font-family:'Playfair Display',serif;font-size:45px;line-height:1.15;font-weight:700;letter-spacing:-.016em;max-width:22ch}
+.tpl-pitch-deck .metric{display:flex;flex-direction:column;gap:5px}
+.tpl-pitch-deck .metric .n{font-size:58px;font-weight:900;letter-spacing:-.028em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.tpl-pitch-deck .metric .l{color:var(--text-2);font-size:13px}
+.tpl-pitch-deck .team-card{text-align:center;padding:26px 16px}
+.tpl-pitch-deck .avatar{width:77px;height:77px;border-radius:50%;margin:0 auto 11px;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:26px}
+.tpl-pitch-deck .ask-box{background:var(--grad);color:#fff;padding:45px 51px;border-radius:var(--radius-lg);box-shadow:0 24px 56px rgba(0,137,255,.35)}
 .tpl-pitch-deck .ask-box .h2{color:#fff}
 .tpl-pitch-deck .ask-box .dim{color:rgba(255,255,255,.85)}
-.tpl-pitch-deck .traction-bar{display:flex;align-items:flex-end;gap:14px;height:240px;margin-top:24px}
-.tpl-pitch-deck .traction-bar .bar{flex:1;background:var(--grad);border-radius:8px 8px 0 0;position:relative;min-height:20px}
-.tpl-pitch-deck .traction-bar .bar span{position:absolute;bottom:-28px;left:0;right:0;text-align:center;font-size:13px;color:var(--text-3)}
-.tpl-pitch-deck .traction-bar .bar em{position:absolute;top:-28px;left:0;right:0;text-align:center;font-size:14px;font-weight:700;font-style:normal;color:var(--text-1)}
-.tpl-pitch-deck .section-num{font-size:220px;font-weight:900;line-height:.9;color:var(--surface-2);position:absolute;right:72px;bottom:40px;z-index:0;letter-spacing:-.05em}
+.tpl-pitch-deck .traction-bar{display:flex;align-items:flex-end;gap:11px;height:192px;margin-top:19px}
+.tpl-pitch-deck .traction-bar .bar{flex:1;background:var(--grad);border-radius:6px 6px 0 0;position:relative;min-height:16px}
+.tpl-pitch-deck .traction-bar .bar span{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-size:10px;color:var(--text-3)}
+.tpl-pitch-deck .traction-bar .bar em{position:absolute;top:-22px;left:0;right:0;text-align:center;font-size:11px;font-weight:700;font-style:normal;color:var(--text-1)}
+.tpl-pitch-deck .section-num{font-size:176px;font-weight:900;line-height:.9;color:var(--surface-2);position:absolute;right:58px;bottom:32px;z-index:0;letter-spacing:-.04em}
 .tpl-pitch-deck .slide > *{position:relative;z-index:1}
 .tpl-pitch-deck .deck-footer{color:var(--text-3)}
 
 /* Custom animations */
 .anim-fade-up{animation:fadeUp .6s var(--ease) both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* QR code placeholder */
-.qr-placeholder{width:200px;height:200px;background:var(--surface-2);border:2px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:14px}
+.qr-placeholder{width:160px;height:160px;background:var(--surface-2);border:2px dashed var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:11px}
 
 /* Icon circles */
-.icon-circle{width:64px;height:64px;border-radius:50%;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:12px}
+.icon-circle{width:51px;height:51px;border-radius:50%;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:10px}
 
 /* Timeline */
-.timeline{position:relative;padding-left:40px}
-.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:3px;background:var(--grad-soft);border-radius:2px}
-.timeline-item{position:relative;margin-bottom:32px;padding-left:24px}
-.timeline-item::before{content:'';position:absolute;left:-32px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
-.timeline-item h4{margin:0 0 4px}
-.timeline-item p{margin:0;color:var(--text-2);font-size:15px}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--grad-soft);border-radius:2px}
+.timeline-item{position:relative;margin-bottom:26px;padding-left:19px}
+.timeline-item::before{content:'';position:absolute;left:-26px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.timeline-item h4{margin:0 0 3px}
+.timeline-item p{margin:0;color:var(--text-2);font-size:12px}
 
 /* Radar chart SVG */
-.radar-svg{max-width:400px;margin:0 auto}
+.radar-svg{max-width:320px;margin:0 auto}
 
 /* Matrix quadrants */
-.matrix-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;height:400px}
-.quadrant{border:2px solid var(--border);border-radius:12px;padding:20px;position:relative}
-.quadrant-label{position:absolute;top:-10px;left:12px;background:var(--bg);padding:2px 10px;font-size:12px;font-weight:600;color:var(--text-3)}
+.matrix-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:13px;height:320px}
+.quadrant{border:2px solid var(--border);border-radius:10px;padding:16px;position:relative}
+.quadrant-label{position:absolute;top:-8px;left:10px;background:var(--bg);padding:2px 8px;font-size:10px;font-weight:600;color:var(--text-3)}
 
 /* Architecture diagram */
-.arch-layer{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin:12px 0;text-align:center}
-.arch-arrow{height:40px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:24px}
+.arch-layer{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;margin:10px 0;text-align:center}
+.arch-arrow{height:32px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:19px}
 
 /* Value cards grid */
-.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.value-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;transition:transform .3s var(--ease)}
-.value-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.value-card .icon{font-size:40px;margin-bottom:12px}
-.value-card h4{margin:0 0 8px;font-size:18px}
-.value-card p{margin:0;font-size:14px;color:var(--text-2)}
-.value-card .metric{font-size:28px;font-weight:800;color:var(--accent);margin-top:8px}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.value-card{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:19px;text-align:center;transition:transform .3s var(--ease)}
+.value-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.value-card .icon{font-size:32px;margin-bottom:10px}
+.value-card h4{margin:0 0 6px;font-size:14px}
+.value-card p{margin:0;font-size:11px;color:var(--text-2)}
+.value-card .metric{font-size:22px;font-weight:800;color:var(--accent);margin-top:6px}
 
 /* Scenario page layout */
-.scenario-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.scenario-layout{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:start}
 .pain-list{list-style:none;padding:0;margin:0}
-.pain-list li{padding:12px 0;border-bottom:1px solid var(--border);position:relative;padding-left:28px}
+.pain-list li{padding:10px 0;border-bottom:1px solid var(--border);position:relative;padding-left:22px}
 .pain-list li::before{content:'⚠';position:absolute;left:0;color:var(--warn)}
-.solution-box{background:var(--grad-soft);border-radius:16px;padding:28px;border-left:4px solid var(--accent)}
-.solution-box h4{color:var(--accent);margin:0 0 12px}
-.effect-tags{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.effect-tag{background:var(--accent);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}
+.solution-box{background:var(--grad-soft);border-radius:13px;padding:22px;border-left:3px solid var(--accent)}
+.solution-box h4{color:var(--accent);margin:0 0 10px}
+.effect-tags{display:flex;gap:10px;margin-top:13px;flex-wrap:wrap}
+.effect-tag{background:var(--accent);color:#fff;padding:5px 11px;border-radius:16px;font-size:10px;font-weight:600}
 
 /* Data flow diagram */
-.flow-diagram{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
-.flow-node{background:var(--surface);border:2px solid var(--accent);border-radius:12px;padding:16px 24px;text-align:center;min-width:120px}
-.flow-arrow{color:var(--accent);font-size:24px}
+.flow-diagram{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.flow-node{background:var(--surface);border:2px solid var(--accent);border-radius:10px;padding:13px 19px;text-align:center;min-width:96px}
+.flow-arrow{color:var(--accent);font-size:19px}
 
 /* ROI cards */
-.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.roi-card{text-align:center;padding:32px;background:var(--surface);border-radius:16px;border:1px solid var(--border)}
-.roi-card .number{font-size:56px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
-.roi-card .label{font-size:16px;color:var(--text-2);margin-top:8px}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:19px}
+.roi-card{text-align:center;padding:26px;background:var(--surface);border-radius:13px;border:1px solid var(--border)}
+.roi-card .number{font-size:45px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.roi-card .label{font-size:13px;color:var(--text-2);margin-top:6px}
 
 /* FAQ cards */
-.faq-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
-.faq-card h4{color:var(--accent);margin:0 0 8px}
+.faq-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:19px;margin-bottom:13px}
+.faq-card h4{color:var(--accent);margin:0 0 6px}
 .faq-card p{margin:0;color:var(--text-2)}
 </style>
 </head>
@@ -259,7 +259,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
   <section class="slide is-active" data-title="封面">
     <div class="cover-bg"></div>
     <div class="cover-blob"></div>
-    <div style="position:absolute;top:56px;left:112px"><span class="brand-dot"></span><span class="brand">广州泽亨实业</span></div>
+    <div style="position:absolute;top:45px;left:90px"><span class="brand-dot"></span><span class="brand">广州泽亨实业</span></div>
     <p class="kicker">数字化+AI升级解决方案</p>
     <h1 class="h1 anim-fade-up" data-anim="fade-up">基于<span class="gradient-text">钉钉AI表格</span> +<br>宜搭低代码 + 悟空AI的<br>一体化方案</h1>
     <p class="lede mt-m">让泽亨的数字化能力从"产品级"延伸到"企业运营级"</p>
@@ -327,35 +327,35 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     </div>
     <div class="mt-l">
       <h4>竞争格局对比</h4>
-      <table style="width:100%;border-collapse:collapse;margin-top:16px;font-size:15px">
+      <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:12px">
         <tr style="border-bottom:2px solid var(--accent)">
-          <th style="text-align:left;padding:12px 8px;color:var(--accent)">维度</th>
-          <th style="text-align:left;padding:12px 8px">国际三大巨头</th>
-          <th style="text-align:left;padding:12px 8px">中国头部企业（含泽亨）</th>
+          <th style="text-align:left;padding:10px 8px;color:var(--accent)">维度</th>
+          <th style="text-align:left;padding:10px 8px">国际三大巨头</th>
+          <th style="text-align:left;padding:10px 8px">中国头部企业（含泽亨）</th>
         </tr>
         <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:10px 8px;font-weight:600">技术路线</td>
-          <td style="padding:10px 8px">标准化设备为主</td>
-          <td style="padding:10px 8px">设备+软件+服务一体化</td>
+          <td style="padding:8px 8px;font-weight:600">技术路线</td>
+          <td style="padding:8px 8px">标准化设备为主</td>
+          <td style="padding:8px 8px">设备+软件+服务一体化</td>
         </tr>
         <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:10px 8px;font-weight:600">数字化程度</td>
-          <td style="padding:10px 8px">中等（传统ERP）</td>
-          <td style="padding:10px 8px">高（Zmart+平台、KS控制系统）</td>
+          <td style="padding:8px 8px;font-weight:600">数字化程度</td>
+          <td style="padding:8px 8px">中等（传统ERP）</td>
+          <td style="padding:8px 8px">高（Zmart+平台、KS控制系统）</td>
         </tr>
         <tr style="border-bottom:1px solid var(--border)">
-          <td style="padding:10px 8px;font-weight:600">服务模式</td>
-          <td style="padding:10px 8px">产品销售为主</td>
-          <td style="padding:10px 8px">全生命周期服务</td>
+          <td style="padding:8px 8px;font-weight:600">服务模式</td>
+          <td style="padding:8px 8px">产品销售为主</td>
+          <td style="padding:8px 8px">全生命周期服务</td>
         </tr>
         <tr>
-          <td style="padding:10px 8px;font-weight:600">市场定位</td>
-          <td style="padding:10px 8px">高端市场垄断</td>
-          <td style="padding:10px 8px">性价比+定制化优势</td>
+          <td style="padding:8px 8px;font-weight:600">市场定位</td>
+          <td style="padding:8px 8px">高端市场垄断</td>
+          <td style="padding:8px 8px">性价比+定制化优势</td>
         </tr>
       </table>
     </div>
-    <p class="lede mt-m" style="font-size:18px"><strong>泽亨定位：</strong>既是设备制造商，又是数字化服务商 —— "四位一体"模式形成差异化竞争优势</p>
+    <p class="lede mt-m" style="font-size:14px"><strong>泽亨定位：</strong>既是设备制造商，又是数字化服务商 —— "四位一体"模式形成差异化竞争优势</p>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="4" data-total="24"></span></div>
     <div class="notes">展示泽亨在全球市场中的独特定位，强调"设备+软件+系统+服务"的差异化优势。</div>
   </section>
@@ -365,7 +365,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num">05</span>
     <p class="num-tag">DIGITAL TRANSFORMATION</p>
     <h2 class="h2 mt-s">粉末涂装行业<br><span class="gradient-text">数字化转型五维评估</span></h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:32px;align-items:center">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:38px;margin-top:26px;align-items:center">
       <div>
         <svg class="radar-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
           <!-- Background circles -->
@@ -409,20 +409,20 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       </div>
       <div>
         <h4>关键发现</h4>
-        <ul style="list-style:none;padding:0;margin:16px 0">
-          <li style="padding:10px 0;border-bottom:1px solid var(--border)">
+        <ul style="list-style:none;padding:0;margin:12px 0">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">
             <strong style="color:var(--accent)">✓ MES系统</strong>：头部企业普及率85%，泽亨已部署但需深化
           </li>
-          <li style="padding:10px 0;border-bottom:1px solid var(--border)">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">
             <strong style="color:var(--accent)">✓ ERP集成</strong>：泽亨具备基础，但与生产数据联动不足
           </li>
-          <li style="padding:10px 0;border-bottom:1px solid var(--border)">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">
             <strong style="color:var(--warn)">⚠ IIoT应用</strong>：设备数据采集充分，但分析应用待加强
           </li>
-          <li style="padding:10px 0;border-bottom:1px solid var(--border)">
+          <li style="padding:8px 0;border-bottom:1px solid var(--border)">
             <strong style="color:var(--bad)">✗ AI应用</strong>：行业整体处于起步阶段，泽亨有先发机会
           </li>
-          <li style="padding:10px 0">
+          <li style="padding:8px 0">
             <strong style="color:var(--warn)">⚠ PLM系统</strong>：研发知识管理分散，缺乏统一平台
           </li>
         </ul>
@@ -440,8 +440,8 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <div class="grid g2 mt-l">
       <div>
         <h4>已有系统清单</h4>
-        <div class="card card-soft mt-s" style="padding:16px">
-          <ul style="margin:0;padding-left:20px;line-height:2">
+        <div class="card card-soft mt-s" style="padding:12px">
+          <ul style="margin:0;padding-left:16px;line-height:2">
             <li>Zmart+ 数字化平台（核心）</li>
             <li>KS系列控制系统（产品线）</li>
             <li>MES接口模块（生产执行）</li>
@@ -450,47 +450,47 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
             <li>CRM客户管理（销售侧）</li>
           </ul>
         </div>
-        <p class="dim mt-s" style="font-size:14px">📄 12项软件著作权集中在产品侧</p>
+        <p class="dim mt-s" style="font-size:11px">📄 12项软件著作权集中在产品侧</p>
       </div>
       <div>
         <h4>业务覆盖热力图</h4>
-        <div class="grid g2 mt-s" style="gap:12px">
-          <div class="card" style="padding:16px;text-align:center;background:#e8f5e9;border-color:#4caf50">
-            <div style="font-size:24px;margin-bottom:8px">✅</div>
+        <div class="grid g2 mt-s" style="gap:10px">
+          <div class="card" style="padding:12px;text-align:center;background:#e8f5e9;border-color:#4caf50">
+            <div style="font-size:19px;margin-bottom:6px">✅</div>
             <div style="font-weight:600">生产控制</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#e8f5e9;border-color:#4caf50">
-            <div style="font-size:24px;margin-bottom:8px">✅</div>
+          <div class="card" style="padding:12px;text-align:center;background:#e8f5e9;border-color:#4caf50">
+            <div style="font-size:19px;margin-bottom:6px">✅</div>
             <div style="font-weight:600">质量检测</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#e8f5e9;border-color:#4caf50">
-            <div style="font-size:24px;margin-bottom:8px">✅</div>
+          <div class="card" style="padding:12px;text-align:center;background:#e8f5e9;border-color:#4caf50">
+            <div style="font-size:19px;margin-bottom:6px">✅</div>
             <div style="font-weight:600">数据采集</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#fff3e0;border-color:#ff9800">
-            <div style="font-size:24px;margin-bottom:8px">❓</div>
+          <div class="card" style="padding:12px;text-align:center;background:#fff3e0;border-color:#ff9800">
+            <div style="font-size:19px;margin-bottom:6px">❓</div>
             <div style="font-weight:600">项目管理</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#fff3e0;border-color:#ff9800">
-            <div style="font-size:24px;margin-bottom:8px">❓</div>
+          <div class="card" style="padding:12px;text-align:center;background:#fff3e0;border-color:#ff9800">
+            <div style="font-size:19px;margin-bottom:6px">❓</div>
             <div style="font-weight:600">售后服务</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#ffebee;border-color:#f44336">
-            <div style="font-size:24px;margin-bottom:8px">❌</div>
+          <div class="card" style="padding:12px;text-align:center;background:#ffebee;border-color:#f44336">
+            <div style="font-size:19px;margin-bottom:6px">❌</div>
             <div style="font-weight:600">HR管理</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#ffebee;border-color:#f44336">
-            <div style="font-size:24px;margin-bottom:8px">❌</div>
+          <div class="card" style="padding:12px;text-align:center;background:#ffebee;border-color:#f44336">
+            <div style="font-size:19px;margin-bottom:6px">❌</div>
             <div style="font-weight:600">业财一体</div>
           </div>
-          <div class="card" style="padding:16px;text-align:center;background:#ffebee;border-color:#f44336">
-            <div style="font-size:24px;margin-bottom:8px">❌</div>
+          <div class="card" style="padding:12px;text-align:center;background:#ffebee;border-color:#f44336">
+            <div style="font-size:19px;margin-bottom:6px">❌</div>
             <div style="font-weight:600">供应链协同</div>
           </div>
         </div>
       </div>
     </div>
-    <p class="lede mt-l" style="font-size:18px"><strong>核心矛盾：</strong>产品数字化能力强，但企业运营数字化存在明显短板</p>
+    <p class="lede mt-l" style="font-size:14px"><strong>核心矛盾：</strong>产品数字化能力强，但企业运营数字化存在明显短板</p>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="6" data-total="24"></span></div>
     <div class="notes">清晰展示泽亨当前的IT系统分布和覆盖情况，为后续痛点分析做铺垫。</div>
   </section>
@@ -503,28 +503,28 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <div class="matrix-grid mt-l">
       <div class="quadrant" style="background:#ffebee">
         <div class="quadrant-label" style="color:var(--bad)">高影响力 · 高紧迫度</div>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px">
-          <li style="margin:8px 0"><strong>项目交付周期长</strong><br><span class="dim">跨部门协作效率低，信息不同步</span></li>
-          <li style="margin:8px 0"><strong>售后服务响应慢</strong><br><span class="dim">客户问题追踪困难，缺乏数字化工具</span></li>
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px">
+          <li style="margin:6px 0"><strong>项目交付周期长</strong><br><span class="dim">跨部门协作效率低，信息不同步</span></li>
+          <li style="margin:6px 0"><strong>售后服务响应慢</strong><br><span class="dim">客户问题追踪困难，缺乏数字化工具</span></li>
         </ul>
       </div>
       <div class="quadrant" style="background:#fff3e0">
         <div class="quadrant-label" style="color:var(--warn)">高影响力 · 中紧迫度</div>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px">
-          <li style="margin:8px 0"><strong>研发知识沉淀不足</strong><br><span class="dim">经验依赖个人，新人培养周期长</span></li>
-          <li style="margin:8px 0"><strong>业财数据割裂</strong><br><span class="dim">财务月结耗时，成本核算不精准</span></li>
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px">
+          <li style="margin:6px 0"><strong>研发知识沉淀不足</strong><br><span class="dim">经验依赖个人，新人培养周期长</span></li>
+          <li style="margin:6px 0"><strong>业财数据割裂</strong><br><span class="dim">财务月结耗时，成本核算不精准</span></li>
         </ul>
       </div>
       <div class="quadrant" style="background:#e3f2fd">
         <div class="quadrant-label" style="color:var(--accent)">中影响力 · 高紧迫度</div>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px">
-          <li style="margin:8px 0"><strong>供应链协同弱</strong><br><span class="dim">采购周期长，供应商管理粗放</span></li>
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px">
+          <li style="margin:6px 0"><strong>供应链协同弱</strong><br><span class="dim">采购周期长，供应商管理粗放</span></li>
         </ul>
       </div>
       <div class="quadrant" style="background:#f3e5f5">
         <div class="quadrant-label" style="color:#9c27b0">中影响力 · 中紧迫度</div>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px">
-          <li style="margin:8px 0"><strong>人事管理手工化</strong><br><span class="dim">入职流程繁琐，薪酬核算工作量大</span></li>
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px">
+          <li style="margin:6px 0"><strong>人事管理手工化</strong><br><span class="dim">入职流程繁琐，薪酬核算工作量大</span></li>
         </ul>
       </div>
     </div>
@@ -537,24 +537,24 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num">08</span>
     <p class="num-tag">ROOT CAUSE ANALYSIS</p>
     <h2 class="h2 mt-s">核心矛盾</h2>
-    <div class="mega" style="font-size:120px;margin:32px 0">产品级数字化 ≠ 企业级数字化</div>
+    <div class="mega" style="font-size:96px;margin:26px 0">产品级数字化 ≠ 企业级数字化</div>
     <p class="lede" style="max-width:50ch;margin:0 auto">
       泽亨在<strong>产品智能化</strong>方面行业领先（Zmart+、KS控制系统），<br>
       但在<strong>企业运营管理</strong>层面仍依赖传统方式和人工协调
     </p>
-    <div class="grid g3 mt-l" style="max-width:900px;margin:48px auto 0">
+    <div class="grid g3 mt-l" style="max-width:720px;margin:38px auto 0">
       <div class="card">
-        <div style="font-size:48px;margin-bottom:12px">🎯</div>
+        <div style="font-size:38px;margin-bottom:10px">🎯</div>
         <h4>强项</h4>
         <p class="dim">设备制造与控制系统的数字化能力</p>
       </div>
       <div class="card" style="border-color:var(--warn);background:#fff8e1">
-        <div style="font-size:48px;margin-bottom:12px">⚠️</div>
+        <div style="font-size:38px;margin-bottom:10px">⚠️</div>
         <h4>断层</h4>
         <p class="dim">产品数据与企业运营数据未打通</p>
       </div>
       <div class="card">
-        <div style="font-size:48px;margin-bottom:12px">💡</div>
+        <div style="font-size:38px;margin-bottom:10px">💡</div>
         <h4>机会</h4>
         <p class="dim">利用钉钉生态补齐企业运营数字化</p>
       </div>
@@ -568,11 +568,11 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num">09</span>
     <p class="num-tag">ARCHITECTURE</p>
     <h2 class="h2 mt-s"><span class="gradient-text">四层融合架构</span><br>集成不替换，平滑升级</h2>
-    <div style="max-width:900px;margin:32px auto 0">
+    <div style="max-width:720px;margin:26px auto 0">
       <!-- Layer 4: 智能层 -->
       <div class="arch-layer" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-color:#0089FF">
         <h4 style="margin:0;color:#0089FF">🧠 智能层 - 悟空AI</h4>
-        <p class="dim" style="margin:8px 0 0">AI助手 · 智能分析 · 自然语言查询 · 自动化决策建议</p>
+        <p class="dim" style="margin:6px 0 0">AI助手 · 智能分析 · 自然语言查询 · 自动化决策建议</p>
       </div>
       
       <div class="arch-arrow">⬆️</div>
@@ -580,15 +580,15 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <!-- Layer 3: 应用层 -->
       <div class="arch-layer" style="background:#f5f5f5">
         <h4 style="margin:0">📱 应用层 - 钉钉原生应用</h4>
-        <div class="grid g3 mt-s" style="gap:12px">
-          <div style="background:#fff;padding:12px;border-radius:8px;border:1px solid #ddd">
-            <strong>AI表格</strong><br><span class="dim" style="font-size:13px">数据管理与分析</span>
+        <div class="grid g3 mt-s" style="gap:10px">
+          <div style="background:#fff;padding:10px;border-radius:6px;border:1px solid #ddd">
+            <strong>AI表格</strong><br><span class="dim" style="font-size:10px">数据管理与分析</span>
           </div>
-          <div style="background:#fff;padding:12px;border-radius:8px;border:1px solid #ddd">
-            <strong>宜搭低代码</strong><br><span class="dim" style="font-size:13px">业务流程搭建</span>
+          <div style="background:#fff;padding:10px;border-radius:6px;border:1px solid #ddd">
+            <strong>宜搭低代码</strong><br><span class="dim" style="font-size:10px">业务流程搭建</span>
           </div>
-          <div style="background:#fff;padding:12px;border-radius:8px;border:1px solid #ddd">
-            <strong>智能人事</strong><br><span class="dim" style="font-size:13px">HR全流程管理</span>
+          <div style="background:#fff;padding:10px;border-radius:6px;border:1px solid #ddd">
+            <strong>智能人事</strong><br><span class="dim" style="font-size:10px">HR全流程管理</span>
           </div>
         </div>
       </div>
@@ -598,7 +598,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <!-- Layer 2: 连接层 -->
       <div class="arch-layer" style="background:#fff3e0;border-color:#ff9800">
         <h4 style="margin:0;color:#e65100">🔗 连接层 - 钉钉连接器</h4>
-        <p class="dim" style="margin:8px 0 0">API网关 · 数据同步 · 消息推送 · 事件触发</p>
+        <p class="dim" style="margin:6px 0 0">API网关 · 数据同步 · 消息推送 · 事件触发</p>
       </div>
       
       <div class="arch-arrow">⬆️</div>
@@ -606,11 +606,11 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <!-- Layer 1: 底层 -->
       <div class="arch-layer" style="background:#e8f5e9;border-color:#4caf50">
         <h4 style="margin:0;color:#2e7d32">🏭 底层 - 泽亨现有系统</h4>
-        <p class="dim" style="margin:8px 0 0">Zmart+平台 · KS控制系统 · MES · ERP · 财务软件</p>
+        <p class="dim" style="margin:6px 0 0">Zmart+平台 · KS控制系统 · MES · ERP · 财务软件</p>
       </div>
     </div>
     <div class="center mt-l">
-      <span class="pill pill-accent" style="font-size:16px;padding:8px 20px">✨ 集成不替换 · 保护既有投资 · 平滑过渡</span>
+      <span class="pill pill-accent" style="font-size:12px;padding:6px 20px">✨ 集成不替换 · 保护既有投资 · 平滑过渡</span>
     </div>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="9" data-total="24"></span></div>
     <div class="notes">清晰展示四层架构的设计思路，强调"集成不替换"原则，降低客户的改造顾虑。</div>
@@ -621,34 +621,34 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num" style="color:rgba(255,255,255,.1)">10</span>
     <p class="num-tag" style="color:#64b5f6">TECHNICAL ARCHITECTURE</p>
     <h2 class="h2 mt-s" style="color:#fff">Zmart+系统对接<br><span style="color:#64b5f6">技术架构</span></h2>
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;margin-top:32px;align-items:center">
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:19px;margin-top:26px;align-items:center">
       <!-- Left: 泽亨系统群 -->
       <div>
         <h4 style="color:#64b5f6;margin:0 0 16px">泽亨系统群</h4>
-        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:20px">
-          <div style="margin-bottom:12px;padding:12px;background:rgba(100,181,246,.15);border-radius:8px">
-            <strong>Zmart+ 平台</strong><br><span style="font-size:13px;color:#b0bec5">RESTful API / WebSocket</span>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:16px">
+          <div style="margin-bottom:10px;padding:10px;background:rgba(100,181,246,.15);border-radius:6px">
+            <strong>Zmart+ 平台</strong><br><span style="font-size:10px;color:#b0bec5">RESTful API / WebSocket</span>
           </div>
-          <div style="margin-bottom:12px;padding:12px;background:rgba(100,181,246,.15);border-radius:8px">
-            <strong>KS 控制系统</strong><br><span style="font-size:13px;color:#b0bec5">Modbus TCP / OPC UA</span>
+          <div style="margin-bottom:10px;padding:10px;background:rgba(100,181,246,.15);border-radius:6px">
+            <strong>KS 控制系统</strong><br><span style="font-size:10px;color:#b0bec5">Modbus TCP / OPC UA</span>
           </div>
-          <div style="margin-bottom:12px;padding:12px;background:rgba(100,181,246,.15);border-radius:8px">
-            <strong>MES 接口</strong><br><span style="font-size:13px;color:#b0bec5">JSON / MQTT</span>
+          <div style="margin-bottom:10px;padding:10px;background:rgba(100,181,246,.15);border-radius:6px">
+            <strong>MES 接口</strong><br><span style="font-size:10px;color:#b0bec5">JSON / MQTT</span>
           </div>
-          <div style="padding:12px;background:rgba(100,181,246,.15);border-radius:8px">
-            <strong>ERP / 财务</strong><br><span style="font-size:13px;color:#b0bec5">数据库直连 / Web Service</span>
+          <div style="padding:10px;background:rgba(100,181,246,.15);border-radius:6px">
+            <strong>ERP / 财务</strong><br><span style="font-size:10px;color:#b0bec5">数据库直连 / Web Service</span>
           </div>
         </div>
       </div>
       
       <!-- Middle: 连接器层 -->
       <div style="text-align:center">
-        <div style="writing-mode:vertical-rl;text-orientation:mixed;color:#64b5f6;font-size:14px;font-weight:600;letter-spacing:4px;margin:0 auto;height:300px;display:flex;align-items:center">
+        <div style="writing-mode:vertical-rl;text-orientation:mixed;color:#64b5f6;font-size:11px;font-weight:600;letter-spacing:2px;margin:0 auto;height:240px;display:flex;align-items:center">
           双向数据流
         </div>
-        <div style="background:rgba(255,152,0,.2);border:2px solid #ff9800;border-radius:12px;padding:16px;margin-top:16px">
+        <div style="background:rgba(255,152,0,.2);border:2px solid #ff9800;border-radius:10px;padding:12px;margin-top:12px">
           <strong style="color:#ffb74d">钉钉连接器</strong>
-          <div style="font-size:12px;color:#b0bec5;margin-top:8px">
+          <div style="font-size:10px;color:#b0bec5;margin-top:6px">
             • API Gateway<br>
             • 数据转换引擎<br>
             • 消息队列<br>
@@ -660,23 +660,23 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <!-- Right: 钉钉应用层 -->
       <div>
         <h4 style="color:#64b5f6;margin:0 0 16px">钉钉应用层</h4>
-        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:20px">
-          <div style="margin-bottom:12px;padding:12px;background:rgba(76,175,80,.15);border-radius:8px">
-            <strong>AI 表格</strong><br><span style="font-size:13px;color:#b0bec5">实时数据看板 / 智能分析</span>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:16px">
+          <div style="margin-bottom:10px;padding:10px;background:rgba(76,175,80,.15);border-radius:6px">
+            <strong>AI 表格</strong><br><span style="font-size:10px;color:#b0bec5">实时数据看板 / 智能分析</span>
           </div>
-          <div style="margin-bottom:12px;padding:12px;background:rgba(76,175,80,.15);border-radius:8px">
-            <strong>宜搭应用</strong><br><span style="font-size:13px;color:#b0bec5">项目管理 / 售后工单</span>
+          <div style="margin-bottom:10px;padding:10px;background:rgba(76,175,80,.15);border-radius:6px">
+            <strong>宜搭应用</strong><br><span style="font-size:10px;color:#b0bec5">项目管理 / 售后工单</span>
           </div>
-          <div style="margin-bottom:12px;padding:12px;background:rgba(76,175,80,.15);border-radius:8px">
-            <strong>智能人事</strong><br><span style="font-size:13px;color:#b0bec5">员工档案 / 薪酬核算</span>
+          <div style="margin-bottom:10px;padding:10px;background:rgba(76,175,80,.15);border-radius:6px">
+            <strong>智能人事</strong><br><span style="font-size:10px;color:#b0bec5">员工档案 / 薪酬核算</span>
           </div>
-          <div style="padding:12px;background:rgba(76,175,80,.15);border-radius:8px">
-            <strong>悟空AI</strong><br><span style="font-size:13px;color:#b0bec5">自然语言查询 / 智能推荐</span>
+          <div style="padding:10px;background:rgba(76,175,80,.15);border-radius:6px">
+            <strong>悟空AI</strong><br><span style="font-size:10px;color:#b0bec5">自然语言查询 / 智能推荐</span>
           </div>
         </div>
       </div>
     </div>
-    <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,.05);border-radius:8px;font-size:14px;color:#b0bec5">
+    <div style="margin-top:19px;padding:12px;background:rgba(255,255,255,.05);border-radius:6px;font-size:11px;color:#b0bec5">
       <strong style="color:#64b5f6">技术要点：</strong>采用异步消息队列保证数据一致性 · OAuth 2.0统一认证 · 数据加密传输（TLS 1.3）· 断点续传机制
     </div>
     <div class="deck-footer" style="color:rgba(255,255,255,.5)"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="10" data-total="24"></span></div>
@@ -750,7 +750,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">基于<strong>宜搭</strong>搭建项目管理应用，集成<strong>AI表格</strong>实现数据可视化</p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>项目看板：甘特图自动更新，里程碑提醒</li>
             <li>任务分配：责任人明确，进度自动汇总</li>
             <li>成本监控：实时对比预算与实际支出</li>
@@ -789,7 +789,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">基于<strong>宜搭</strong>构建售后工单系统，对接<strong>Zmart+设备数据</strong></p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>多渠道报修：钉钉/电话/扫码统一接入</li>
             <li>智能派单：根据位置、技能自动匹配工程师</li>
             <li>知识库联动：自动推荐相似案例解决方案</li>
@@ -828,7 +828,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">基于<strong>钉钉文档+悟空AI</strong>构建研发知识库</p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>知识结构化：技术方案/测试报告/专利文档分类存储</li>
             <li>智能检索：自然语言搜索，秒级定位相关内容</li>
             <li>新人引导：自动生成学习路径和必读文档清单</li>
@@ -867,7 +867,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">基于<strong>AI表格</strong>连接业务系统与财务软件，实现数据自动同步</p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>数据打通：订单/出库/收款自动同步至财务</li>
             <li>自动对账：业务流水与财务凭证智能匹配</li>
             <li>实时看板：收入/成本/利润/现金流实时监控</li>
@@ -906,7 +906,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">基于<strong>宜搭</strong>搭建供应商门户，集成<strong>AI表格</strong>进行数据分析</p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>供应商档案：资质/绩效/价格历史统一管理</li>
             <li>在线询价：多家供应商同时报价，自动比价</li>
             <li>交货跟踪：供应商自助更新交货进度</li>
@@ -945,7 +945,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
         <div class="solution-box">
           <h4>✅ 解决方案</h4>
           <p style="margin:0 0 12px">启用<strong>钉钉智能人事</strong>，全流程数字化管理</p>
-          <ul style="margin:0;padding-left:20px;line-height:1.8">
+          <ul style="margin:0;padding-left:16px;line-height:1.8">
             <li>在线入职：电子合同/信息采集/权限开通一站式</li>
             <li>智能考勤：打卡数据自动汇总，异常自动提醒</li>
             <li>薪酬自动化：考勤+绩效+社保自动计算工资</li>
@@ -969,44 +969,44 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num">18</span>
     <p class="num-tag">SYNERGY EFFECT</p>
     <h2 class="h2 mt-s"><span class="gradient-text">场景联动效应</span><br>数据打通创造倍增效应</h2>
-    <div style="margin-top:32px">
-      <h4 style="text-align:center;margin-bottom:24px">业务旅程：从下单到复购的完整闭环</h4>
+    <div style="margin-top:26px">
+      <h4 style="text-align:center;margin-bottom:19px">业务旅程：从下单到复购的完整闭环</h4>
       <div class="flow-diagram">
         <div class="flow-node">
-          <div style="font-size:32px;margin-bottom:8px">📝</div>
-          <strong>下单</strong><br><span class="dim" style="font-size:12px">CRM记录需求</span>
+          <div style="font-size:26px;margin-bottom:6px">📝</div>
+          <strong>下单</strong><br><span class="dim" style="font-size:10px">CRM记录需求</span>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-node">
-          <div style="font-size:32px;margin-bottom:8px">📋</div>
-          <strong>立项</strong><br><span class="dim" style="font-size:12px">项目管理启动</span>
+          <div style="font-size:26px;margin-bottom:6px">📋</div>
+          <strong>立项</strong><br><span class="dim" style="font-size:10px">项目管理启动</span>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-node">
-          <div style="font-size:32px;margin-bottom:8px">🏭</div>
-          <strong>排产</strong><br><span class="dim" style="font-size:12px">供应链协同</span>
+          <div style="font-size:26px;margin-bottom:6px">🏭</div>
+          <strong>排产</strong><br><span class="dim" style="font-size:10px">供应链协同</span>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-node">
-          <div style="font-size:32px;margin-bottom:8px">✅</div>
-          <strong>交付</strong><br><span class="dim" style="font-size:12px">业财同步确认</span>
+          <div style="font-size:26px;margin-bottom:6px">✅</div>
+          <strong>交付</strong><br><span class="dim" style="font-size:10px">业财同步确认</span>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-node">
-          <div style="font-size:32px;margin-bottom:8px">🔧</div>
-          <strong>售后</strong><br><span class="dim" style="font-size:12px">工单追踪服务</span>
+          <div style="font-size:26px;margin-bottom:6px">🔧</div>
+          <strong>售后</strong><br><span class="dim" style="font-size:10px">工单追踪服务</span>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-node" style="border-color:var(--good);background:#e8f5e9">
-          <div style="font-size:32px;margin-bottom:8px">🔄</div>
-          <strong>复购</strong><br><span class="dim" style="font-size:12px">客户满意度提升</span>
+          <div style="font-size:26px;margin-bottom:6px">🔄</div>
+          <strong>复购</strong><br><span class="dim" style="font-size:10px">客户满意度提升</span>
         </div>
       </div>
     </div>
     <div class="grid g3 mt-l">
       <div class="card card-accent">
         <h4>📊 数据流动示例</h4>
-        <p class="dim" style="font-size:14px;line-height:1.7">
+        <p class="dim" style="font-size:11px;line-height:1.7">
           销售订单 → 自动创建项目 → 触发采购申请 → 
           生产进度实时同步 → 发货自动开票 → 
           财务应收更新 → 售后工单关联设备 → 
@@ -1015,7 +1015,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       </div>
       <div class="card card-accent">
         <h4>🎯 跨场景价值</h4>
-        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+        <ul style="margin:0;padding-left:14px;font-size:11px;line-height:1.8">
           <li>项目成本数据自动流入财务核算</li>
           <li>售后问题反馈驱动研发改进</li>
           <li>供应链绩效影响供应商选择</li>
@@ -1024,7 +1024,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       </div>
       <div class="card card-accent">
         <h4>💡 AI赋能点</h4>
-        <ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">
+        <ul style="margin:0;padding-left:14px;font-size:11px;line-height:1.8">
           <li>悟空AI自动分析项目风险并预警</li>
           <li>智能推荐最优供应商组合</li>
           <li>基于历史数据预测交付周期</li>
@@ -1041,11 +1041,11 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <span class="section-num">19</span>
     <p class="num-tag">IMPLEMENTATION ROADMAP</p>
     <h2 class="h2 mt-s"><span class="gradient-text">三期实施路线图</span><br>循序渐进，快速见效</h2>
-    <div class="timeline mt-l" style="max-width:800px;margin:32px auto">
+    <div class="timeline mt-l" style="max-width:640px;margin:26px auto">
       <div class="timeline-item">
         <h4 style="color:var(--accent)">第一期：基础连接（1-3月）</h4>
         <p><strong>目标：</strong>打通核心系统，建立数据基础</p>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--text-2)">
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px;color:var(--text-2)">
           <li>部署钉钉连接器，对接Zmart+和MES</li>
           <li>搭建项目管理宜搭应用（MVP版本）</li>
           <li>启用智能人事基础功能（考勤+档案）</li>
@@ -1057,7 +1057,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <div class="timeline-item">
         <h4 style="color:var(--accent-2)">第二期：核心应用（4-6月）</h4>
         <p><strong>目标：</strong>扩展应用场景，深化业务流程</p>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--text-2)">
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px;color:var(--text-2)">
           <li>上线售后服务工单系统</li>
           <li>搭建研发知识库（文档+智能检索）</li>
           <li>业财一体化看板完善（自动对账+实时损益）</li>
@@ -1069,7 +1069,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <div class="timeline-item">
         <h4 style="color:#7b1fa2">第三期：AI深化（7-12月）</h4>
         <p><strong>目标：</strong>引入悟空AI，实现智能化运营</p>
-        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--text-2)">
+        <ul style="margin:6px 0 0;padding-left:14px;font-size:11px;color:var(--text-2)">
           <li>悟空AI接入：自然语言查询经营数据</li>
           <li>智能预警：项目风险/库存异常/应收逾期</li>
           <li>知识助手：研发文档智能生成与推荐</li>
@@ -1091,7 +1091,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <div class="roi-card">
         <div class="number">35%</div>
         <div class="label">效率提升</div>
-        <p class="dim" style="font-size:14px;margin-top:12px">
+        <p class="dim" style="font-size:11px;margin-top:10px">
           • 项目管理效率 +30%<br>
           • 财务月结时间 -60%<br>
           • 售后响应速度 +40%<br>
@@ -1101,7 +1101,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <div class="roi-card">
         <div class="number">¥380万</div>
         <div class="label">年化成本节约</div>
-        <p class="dim" style="font-size:14px;margin-top:12px">
+        <p class="dim" style="font-size:11px;margin-top:10px">
           • 人力成本节省：¥180万<br>
           • 采购成本优化：¥120万<br>
           • 坏账损失减少：¥50万<br>
@@ -1111,24 +1111,24 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       <div class="roi-card">
         <div class="number">¥300万</div>
         <div class="label">年化收入增长</div>
-        <p class="dim" style="font-size:14px;margin-top:12px">
+        <p class="dim" style="font-size:11px;margin-top:10px">
           • 交付能力提升带来新订单：¥180万<br>
           • 售后服务增值收入：¥80万<br>
           • 客户复购率提升：¥40万
         </p>
       </div>
     </div>
-    <div class="grid g2 mt-l" style="max-width:700px;margin:32px auto 0">
+    <div class="grid g2 mt-l" style="max-width:560px;margin:26px auto 0">
       <div class="card" style="text-align:center;background:var(--grad-soft);border-color:var(--accent)">
-        <div style="font-size:48px;font-weight:900;color:var(--accent)">¥650-700万</div>
-        <div style="font-size:16px;color:var(--text-2);margin-top:8px">合计年化价值</div>
+        <div style="font-size:38px;font-weight:900;color:var(--accent)">¥650-700万</div>
+        <div style="font-size:12px;color:var(--text-2);margin-top:6px">合计年化价值</div>
       </div>
       <div class="card" style="text-align:center;background:var(--grad-soft);border-color:var(--accent)">
-        <div style="font-size:48px;font-weight:900;color:var(--accent)">6-9个月</div>
-        <div style="font-size:16px;color:var(--text-2);margin-top:8px">投资回报周期</div>
+        <div style="font-size:38px;font-weight:900;color:var(--accent)">6-9个月</div>
+        <div style="font-size:12px;color:var(--text-2);margin-top:6px">投资回报周期</div>
       </div>
     </div>
-    <p class="dim center mt-m" style="font-size:14px">* 基于泽亨当前业务规模估算，实际效果可能因执行力度而有所差异</p>
+    <p class="dim center mt-m" style="font-size:11px">* 基于泽亨当前业务规模估算，实际效果可能因执行力度而有所差异</p>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="20" data-total="24"></span></div>
     <div class="notes">清晰的ROI数据帮助决策者量化投资价值，6-9个月的回报周期非常有吸引力。</div>
   </section>
@@ -1171,7 +1171,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       </div>
     </div>
     <div class="center mt-l">
-      <p class="lede" style="font-size:18px">钉钉已成为中国<strong>超过2500万企业组织</strong>的选择，生态成熟度行业第一</p>
+      <p class="lede" style="font-size:14px">钉钉已成为中国<strong>超过2500万企业组织</strong>的选择，生态成熟度行业第一</p>
     </div>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="21" data-total="24"></span></div>
     <div class="notes">强调钉钉生态的优势，特别是与泽亨需求的匹配度。</div>
@@ -1184,26 +1184,26 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <h2 class="h2 mt-s">立即体验<span class="gradient-text">原型Demo</span></h2>
     <p class="lede mt-m" style="margin:0 auto">我们已为您准备了可交互的应用原型，包含真实数据模拟</p>
     
-    <div class="grid g2 mt-l" style="max-width:800px;margin:48px auto 0">
+    <div class="grid g2 mt-l" style="max-width:640px;margin:38px auto 0">
       <div class="card" style="text-align:center">
         <div class="qr-placeholder" style="margin:0 auto 16px">
           <div>
-            <div style="font-size:48px;margin-bottom:8px">📱</div>
+            <div style="font-size:38px;margin-bottom:6px">📱</div>
             <div>扫码体验</div>
           </div>
         </div>
-        <p class="dim" style="font-size:14px">钉钉扫码打开演示环境</p>
+        <p class="dim" style="font-size:11px">钉钉扫码打开演示环境</p>
       </div>
       <div class="card" style="text-align:left">
         <h4>推荐体验路径</h4>
-        <ol style="margin:16px 0;padding-left:20px;line-height:2">
+        <ol style="margin:12px 0;padding-left:16px;line-height:2">
           <li><strong>项目管理看板</strong> - 查看项目进度甘特图</li>
           <li><strong>售后工单系统</strong> - 模拟创建和处理工单</li>
           <li><strong>业财一体化看板</strong> - 实时数据可视化</li>
           <li><strong>悟空AI对话</strong> - 尝试自然语言查询数据</li>
           <li><strong>研发知识库</strong> - 体验智能文档检索</li>
         </ol>
-        <p class="dim" style="font-size:13px;margin-top:12px">💡 提示：所有数据均为模拟数据，仅供演示用途</p>
+        <p class="dim" style="font-size:10px;margin-top:10px">💡 提示：所有数据均为模拟数据，仅供演示用途</p>
       </div>
     </div>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="22" data-total="24"></span></div>
@@ -1230,7 +1230,7 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
       </div>
     </div>
     <div class="center mt-l">
-      <p class="lede" style="font-size:20px">还有其他问题吗？欢迎随时提问！</p>
+      <p class="lede" style="font-size:16px">还有其他问题吗？欢迎随时提问！</p>
     </div>
     <div class="deck-footer"><span>广州泽亨实业有限公司</span><span class="slide-number" data-current="23" data-total="24"></span></div>
     <div class="notes">预设三个最常见的疑虑并给出专业回答，展现方案的成熟度和周全考虑。</div>
@@ -1241,27 +1241,27 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
     <div class="cover-bg"></div>
     <div class="cover-blob"></div>
     <div>
-      <div class="mega" style="font-size:140px">感谢</div>
+      <div class="mega" style="font-size:112px">感谢</div>
       <p class="mega-sub">感谢您的时间与关注</p>
-      <div class="grid g3 mt-l" style="max-width:700px;margin:48px auto 0">
-        <div class="card" style="padding:20px">
-          <div style="font-size:32px;margin-bottom:8px">📧</div>
+      <div class="grid g3 mt-l" style="max-width:560px;margin:38px auto 0">
+        <div class="card" style="padding:16px">
+          <div style="font-size:26px;margin-bottom:6px">📧</div>
           <div style="font-weight:600">邮箱联系</div>
-          <p class="dim" style="font-size:14px;margin:8px 0 0">contact@wukong-ai.com</p>
+          <p class="dim" style="font-size:11px;margin:6px 0 0">contact@wukong-ai.com</p>
         </div>
-        <div class="card" style="padding:20px">
-          <div style="font-size:32px;margin-bottom:8px">📞</div>
+        <div class="card" style="padding:16px">
+          <div style="font-size:26px;margin-bottom:6px">📞</div>
           <div style="font-weight:600">电话咨询</div>
-          <p class="dim" style="font-size:14px;margin:8px 0 0">400-XXX-XXXX</p>
+          <p class="dim" style="font-size:11px;margin:6px 0 0">400-XXX-XXXX</p>
         </div>
-        <div class="card" style="padding:20px">
-          <div style="font-size:32px;margin-bottom:8px">💬</div>
+        <div class="card" style="padding:16px">
+          <div style="font-size:26px;margin-bottom:6px">💬</div>
           <div style="font-weight:600">钉钉沟通</div>
-          <p class="dim" style="font-size:14px;margin:8px 0 0">搜索"悟空AI"</p>
+          <p class="dim" style="font-size:11px;margin:6px 0 0">搜索"悟空AI"</p>
         </div>
       </div>
-      <div class="row mt-l" style="justify-content:center;gap:24px">
-        <span class="pill pill-accent" style="font-size:14px;padding:8px 20px">期待与泽亨携手共创数字化未来</span>
+      <div class="row mt-l" style="justify-content:center;gap:19px">
+        <span class="pill pill-accent" style="font-size:11px;padding:6px 20px">期待与泽亨携手共创数字化未来</span>
       </div>
     </div>
     <div class="deck-footer"><span>2026年7月 | 悟空AI</span><span class="slide-number" data-current="24" data-total="24"></span></div>
