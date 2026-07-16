@@ -596,6 +596,7 @@
                 <a href="#diagnosis">现状诊断</a>
                 <a href="#overview">方案总览</a>
                 <a href="#scenarios">应用场景</a>
+                <a href="#hr">智能人事</a>
                 <a href="#roadmap">实施路线</a>
                 <a href="#roi">ROI预估</a>
             </div>
@@ -765,7 +766,115 @@
                 </div>
             </div>
 
-            <div class="section-subtitle">2.2 核心价值主张</div>
+            <div class="section-subtitle">2.2 Zmart+系统对接技术架构</div>
+            <div style="background: #1a1a2e; padding: 40px; border-radius: 12px; margin: 30px 0;">
+                <svg width="100%" height="420" viewBox="0 0 1000 420">
+                    <!-- 左侧：泽亨现有系统群 -->
+                    <rect x="30" y="40" width="260" height="340" rx="12" fill="#2d2d44" stroke="#4a4a6a" stroke-width="2"/>
+                    <text x="160" y="75" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">泽亨现有系统群</text>
+                    
+                    <rect x="50" y="95" width="220" height="45" rx="6" fill="#3d3d5c"/>
+                    <text x="160" y="123" text-anchor="middle" fill="#e0e0e0" font-size="13">Zmart+数字化平台</text>
+                    
+                    <rect x="50" y="150" width="220" height="45" rx="6" fill="#3d3d5c"/>
+                    <text x="160" y="178" text-anchor="middle" fill="#e0e0e0" font-size="13">KS60/KS50控制系统</text>
+                    
+                    <rect x="50" y="205" width="220" height="45" rx="6" fill="#3d3d5c"/>
+                    <text x="160" y="233" text-anchor="middle" fill="#e0e0e0" font-size="13">MES接口模块</text>
+                    
+                    <rect x="50" y="260" width="220" height="45" rx="6" fill="#3d3d5c"/>
+                    <text x="160" y="288" text-anchor="middle" fill="#e0e0e0" font-size="13">SIEMENS/AB PLC</text>
+                    
+                    <rect x="50" y="315" width="220" height="45" rx="6" fill="#3d3d5c"/>
+                    <text x="160" y="343" text-anchor="middle" fill="#e0e0e0" font-size="13">ZmarTest检测仪</text>
+                    
+                    <!-- 中间：钉钉集成连接器层 -->
+                    <rect x="370" y="40" width="260" height="340" rx="12" fill="#1e3a5f" stroke="#0089FF" stroke-width="2"/>
+                    <text x="500" y="75" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">钉钉集成连接器层</text>
+                    
+                    <rect x="390" y="95" width="220" height="45" rx="6" fill="#2a4a6f"/>
+                    <text x="500" y="123" text-anchor="middle" fill="#e0e0e0" font-size="13">API网关</text>
+                    
+                    <rect x="390" y="150" width="220" height="45" rx="6" fill="#2a4a6f"/>
+                    <text x="500" y="178" text-anchor="middle" fill="#e0e0e0" font-size="13">数据映射引擎</text>
+                    
+                    <rect x="390" y="205" width="220" height="45" rx="6" fill="#2a4a6f"/>
+                    <text x="500" y="233" text-anchor="middle" fill="#e0e0e0" font-size="13">消息队列</text>
+                    
+                    <rect x="390" y="260" width="220" height="45" rx="6" fill="#2a4a6f"/>
+                    <text x="500" y="288" text-anchor="middle" fill="#e0e0e0" font-size="13">安全认证(OAuth2.0)</text>
+                    
+                    <rect x="390" y="315" width="220" height="45" rx="6" fill="#2a4a6f"/>
+                    <text x="500" y="343" text-anchor="middle" fill="#e0e0e0" font-size="13">数据加密传输</text>
+                    
+                    <!-- 右侧：钉钉应用层 -->
+                    <rect x="710" y="40" width="260" height="340" rx="12" fill="#2d2d44" stroke="#4CAF50" stroke-width="2"/>
+                    <text x="840" y="75" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="bold">钉钉应用层</text>
+                    
+                    <rect x="730" y="95" width="220" height="45" rx="6" fill="#3d5c3d"/>
+                    <text x="840" y="123" text-anchor="middle" fill="#e0e0e0" font-size="13">AI表格</text>
+                    
+                    <rect x="730" y="150" width="220" height="45" rx="6" fill="#3d5c3d"/>
+                    <text x="840" y="178" text-anchor="middle" fill="#e0e0e0" font-size="13">宜搭应用</text>
+                    
+                    <rect x="730" y="205" width="220" height="45" rx="6" fill="#3d5c3d"/>
+                    <text x="840" y="233" text-anchor="middle" fill="#e0e0e0" font-size="13">悟空AI</text>
+                    
+                    <rect x="730" y="260" width="220" height="45" rx="6" fill="#3d5c3d"/>
+                    <text x="840" y="288" text-anchor="middle" fill="#e0e0e0" font-size="13">智能人事</text>
+                    
+                    <rect x="730" y="315" width="220" height="45" rx="6" fill="#3d5c3d"/>
+                    <text x="840" y="343" text-anchor="middle" fill="#e0e0e0" font-size="13">审批流程</text>
+                    
+                    <!-- 双向数据流箭头 - 上行 -->
+                    <defs>
+                        <linearGradient id="gradUp" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0089FF;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="gradDown" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#0089FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FF9800;stop-opacity:1" />
+                        </linearGradient>
+                        <marker id="arrowUp" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#4CAF50"/>
+                        </marker>
+                        <marker id="arrowDown" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#FF9800"/>
+                        </marker>
+                    </defs>
+                    
+                    <!-- 上行箭头：生产数据→分析决策 -->
+                    <line x1="290" y1="140" x2="370" y2="140" stroke="url(#gradUp)" stroke-width="3" marker-end="url(#arrowUp)"/>
+                    <text x="330" y="130" text-anchor="middle" fill="#4CAF50" font-size="11">REST API</text>
+                    
+                    <line x1="290" y1="200" x2="370" y2="200" stroke="url(#gradUp)" stroke-width="3" marker-end="url(#arrowUp)"/>
+                    <text x="330" y="190" text-anchor="middle" fill="#4CAF50" font-size="11">MQTT协议</text>
+                    
+                    <line x1="630" y1="140" x2="710" y2="140" stroke="url(#gradUp)" stroke-width="3" marker-end="url(#arrowUp)"/>
+                    <text x="670" y="130" text-anchor="middle" fill="#4CAF50" font-size="11">数据同步</text>
+                    
+                    <line x1="630" y1="200" x2="710" y2="200" stroke="url(#gradUp)" stroke-width="3" marker-end="url(#arrowUp)"/>
+                    <text x="670" y="190" text-anchor="middle" fill="#4CAF50" font-size="11">事件推送</text>
+                    
+                    <!-- 下行箭头：管理指令→产线控制 -->
+                    <line x1="370" y1="260" x2="290" y2="260" stroke="url(#gradDown)" stroke-width="3" marker-end="url(#arrowDown)"/>
+                    <text x="330" y="275" text-anchor="middle" fill="#FF9800" font-size="11">指令下发</text>
+                    
+                    <line x1="710" y1="260" x2="630" y2="260" stroke="url(#gradDown)" stroke-width="3" marker-end="url(#arrowDown)"/>
+                    <text x="670" y="275" text-anchor="middle" fill="#FF9800" font-size="11">配置更新</text>
+                    
+                    <!-- 底部说明标签 -->
+                    <text x="160" y="400" text-anchor="middle" fill="#4CAF50" font-size="12" font-weight="bold">↑ 生产数据上行 → 分析决策</text>
+                    <text x="500" y="400" text-anchor="middle" fill="#0089FF" font-size="12" font-weight="bold">关键技术：REST API / MQTT / OAuth2.0 / 数据加密</text>
+                    <text x="840" y="400" text-anchor="middle" fill="#FF9800" font-size="12" font-weight="bold">↓ 管理指令下行 → 产线控制</text>
+                </svg>
+                <div style="text-align: center; margin-top: 20px; color: #a0a0c0; font-size: 14px; font-style: italic;">
+                    "集成不替换"策略——保留Zmart+核心能力，通过标准化接口实现数据互通
+                </div>
+            </div>
+
+            <div class="section-subtitle">2.3 核心价值主张</div>
             <div class="card-grid">
                 <div class="card">
                     <div class="card-title">💡 集成不替换</div>
@@ -1022,6 +1131,112 @@
                 </div>
             </div>
         </section>
+
+        <div class="scenario-card">
+            <div class="scenario-header">
+                <div class="scenario-number">6</div>
+                <div class="scenario-title">钉钉智能人事一体化</div>
+            </div>
+            
+            <div class="scenario-section">
+                <div class="scenario-section-title">🎯 痛点描述</div>
+                <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                    泽亨技术人员占比35%+，平均年龄不到30岁，人员流动性风险高；招聘渠道分散（BOSS直聘/猎聘/校招多渠道），入职流程线下化；培训体系不完善，新人培养周期长；绩效考核与项目交付脱节；薪酬核算手工操作效率低。
+                </p>
+            </div>
+
+            <div class="scenario-section">
+                <div class="scenario-section-title">🏗️ 方案架构</div>
+                <p style="font-size: 14px; color: #666; line-height: 1.8;">
+                    <strong>钉钉智能人事</strong>作为统一HR底座，覆盖招聘→入职→考勤→薪酬→绩效→培训全链路；<strong>宜搭</strong>搭建定制化HR流程应用；<strong>AI表格</strong>建立人才数据库和分析看板；<strong>悟空AI</strong>提供智能简历筛选、人才画像分析和离职风险预警。
+                </p>
+            </div>
+
+            <div class="scenario-section">
+                <div class="scenario-section-title">✅ 功能清单</div>
+                <ul class="feature-list">
+                    <li>智能招聘管理：多渠道简历汇聚、AI简历筛选、面试安排自动化</li>
+                    <li>电子合同与入职：在线签署劳动合同、入职材料电子化采集</li>
+                    <li>智能考勤排班：支持多工厂/多班次排班、外勤打卡、加班自动统计</li>
+                    <li>薪酬自动核算：对接考勤数据、社保公积金自动计算、工资条一键发放</li>
+                    <li>OKR/KPI绩效管理：与项目管理系统联动、目标对齐、360度评估</li>
+                    <li>培训学习平台：在线课程库、考试认证、学习路径规划</li>
+                    <li>人才盘点与继任计划：九宫格人才矩阵、关键岗位继任者识别</li>
+                    <li>员工自助服务：请假/报销/证明开具移动端自助办理</li>
+                </ul>
+            </div>
+
+            <div class="scenario-section">
+                <div class="scenario-section-title">📊 预期效果</div>
+                <div>
+                    <span class="effect-badge">入职效率提升 60%</span>
+                    <span class="effect-badge">薪酬核算时间缩短 80%</span>
+                    <span class="effect-badge">员工满意度提升 25%</span>
+                    <span class="effect-badge">核心人才保留率提升 20%</span>
+                </div>
+            </div>
+
+            <div class="scenario-section">
+                <div class="scenario-section-title">🔗 模块联动关系</div>
+                <svg width="100%" height="280" viewBox="0 0 900 280" style="background: #f8f9fb; border-radius: 8px; padding: 20px;">
+                    <!-- 中心节点：智能人事 -->
+                    <rect x="350" y="100" width="200" height="80" rx="10" fill="#0089FF" opacity="0.9"/>
+                    <text x="450" y="135" text-anchor="middle" fill="white" font-size="16" font-weight="bold">钉钉智能人事</text>
+                    <text x="450" y="160" text-anchor="middle" fill="white" font-size="12">统一HR底座</text>
+                    
+                    <!-- 左上：项目管理 -->
+                    <rect x="80" y="30" width="140" height="60" rx="8" fill="#4CAF50" opacity="0.8"/>
+                    <text x="150" y="65" text-anchor="middle" fill="white" font-size="13" font-weight="bold">项目管理</text>
+                    
+                    <!-- 右上：售后服务 -->
+                    <rect x="680" y="30" width="140" height="60" rx="8" fill="#FF9800" opacity="0.8"/>
+                    <text x="750" y="65" text-anchor="middle" fill="white" font-size="13" font-weight="bold">售后服务</text>
+                    
+                    <!-- 左下：知识库 -->
+                    <rect x="80" y="190" width="140" height="60" rx="8" fill="#9C27B0" opacity="0.8"/>
+                    <text x="150" y="225" text-anchor="middle" fill="white" font-size="13" font-weight="bold">研发知识库</text>
+                    
+                    <!-- 右下：业财一体化 -->
+                    <rect x="680" y="190" width="140" height="60" rx="8" fill="#F44336" opacity="0.8"/>
+                    <text x="750" y="225" text-anchor="middle" fill="white" font-size="13" font-weight="bold">业财一体化</text>
+                    
+                    <!-- 连线箭头 -->
+                    <!-- 项目管理 → 智能人事 -->
+                    <defs>
+                        <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#4CAF50"/>
+                        </marker>
+                        <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#FF9800"/>
+                        </marker>
+                        <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#9C27B0"/>
+                        </marker>
+                        <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#F44336"/>
+                        </marker>
+                    </defs>
+                    
+                    <line x1="220" y1="75" x2="350" y2="120" stroke="#4CAF50" stroke-width="2" marker-end="url(#arrowGreen)"/>
+                    <text x="270" y="90" fill="#4CAF50" font-size="10">绩效数据同步</text>
+                    
+                    <line x1="680" y1="75" x2="550" y2="120" stroke="#FF9800" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <text x="600" y="90" fill="#FF9800" font-size="10">服务人员调度</text>
+                    
+                    <line x1="220" y1="210" x2="350" y2="160" stroke="#9C27B0" stroke-width="2" marker-end="url(#arrowPurple)"/>
+                    <text x="270" y="195" fill="#9C27B0" font-size="10">培训知识沉淀</text>
+                    
+                    <line x1="680" y1="210" x2="550" y2="160" stroke="#F44336" stroke-width="2" marker-end="url(#arrowRed)"/>
+                    <text x="600" y="195" fill="#F44336" font-size="10">薪酬成本归集</text>
+                    
+                    <!-- 反向箭头 -->
+                    <line x1="350" y1="140" x2="220" y2="95" stroke="#0089FF" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowGreen)"/>
+                    <line x1="550" y1="140" x2="680" y2="95" stroke="#0089FF" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowOrange)"/>
+                    <line x1="350" y1="160" x2="220" y2="205" stroke="#0089FF" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowPurple)"/>
+                    <line x1="550" y1="160" x2="680" y2="205" stroke="#0089FF" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowRed)"/>
+                </svg>
+            </div>
+        </div>
 
         <section id="roadmap" class="section">
             <h2 class="section-title">四、实施路线图</h2>

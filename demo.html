@@ -156,6 +156,7 @@
                 <div class="nav-item" data-page="knowledge"><span class="nav-icon">📚</span><span class="nav-text">知识库</span></div>
                 <div class="nav-item" data-page="dashboard"><span class="nav-icon">📈</span><span class="nav-text">经营看板</span></div>
                 <div class="nav-item" data-page="approval"><span class="nav-icon">✅</span><span class="nav-text">审批中心</span></div>
+                <div class="nav-item" data-page="hr"><span class="nav-icon">👥</span><span class="nav-text">智能人事</span></div>
             </nav>
         </aside>
         
@@ -389,6 +390,128 @@
                     </div>
                 </section>
                 
+                <!-- 8. 智能人事 -->
+                <section class="page-section" id="page-hr">
+                    <div class="card">
+                        <div class="tabs">
+                            <div class="tab-item active" onclick="switchHRTab(this, 'hrRoster')">员工花名册</div>
+                            <div class="tab-item" onclick="switchHRTab(this, 'hrAttendance')">考勤管理</div>
+                            <div class="tab-item" onclick="switchHRTab(this, 'hrSalary')">薪酬核算</div>
+                            <div class="tab-item" onclick="switchHRTab(this, 'hrRecruit')">招聘管理</div>
+                            <div class="tab-item" onclick="switchHRTab(this, 'hrTraining')">培训学习</div>
+                        </div>
+                        
+                        <!-- Tab1: 员工花名册 -->
+                        <div class="tab-content active" id="hrRoster">
+                            <table class="data-table" id="rosterTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('rosterTable', 0)">工号 ↕</th>
+                                        <th onclick="sortTable('rosterTable', 1)">姓名 ↕</th>
+                                        <th onclick="sortTable('rosterTable', 2)">部门 ↕</th>
+                                        <th onclick="sortTable('rosterTable', 3)">岗位 ↕</th>
+                                        <th>入职日期</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rosterTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Tab2: 考勤管理 -->
+                        <div class="tab-content" id="hrAttendance">
+                            <div class="kpi-grid" style="margin-bottom: 20px;">
+                                <div class="kpi-card"><div class="kpi-label">应出勤天数</div><div class="kpi-value">22天</div></div>
+                                <div class="kpi-card"><div class="kpi-label">实际出勤</div><div class="kpi-value">20天</div></div>
+                                <div class="kpi-card"><div class="kpi-label">迟到次数</div><div class="kpi-value" style="color: var(--warning);">3次</div></div>
+                                <div class="kpi-card"><div class="kpi-label">请假天数</div><div class="kpi-value">2天</div></div>
+                                <div class="kpi-card"><div class="kpi-label">加班时长</div><div class="kpi-value">18小时</div></div>
+                            </div>
+                            
+                            <h4 style="margin: 20px 0 12px;">考勤日历（2026年1月）</h4>
+                            <div id="attendanceCalendar" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 20px;"></div>
+                            
+                            <h4 style="margin: 20px 0 12px;">考勤明细</h4>
+                            <table class="data-table" id="attendanceTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('attendanceTable', 0)">日期 ↕</th>
+                                        <th>上班打卡</th>
+                                        <th>下班打卡</th>
+                                        <th>工时</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Tab3: 薪酬核算 -->
+                        <div class="tab-content" id="hrSalary">
+                            <div class="kpi-grid" style="margin-bottom: 20px;">
+                                <div class="kpi-card"><div class="kpi-label">总人数</div><div class="kpi-value">48人</div></div>
+                                <div class="kpi-card"><div class="kpi-label">应发总额</div><div class="kpi-value">¥58.6万</div></div>
+                                <div class="kpi-card"><div class="kpi-label">社保公积金</div><div class="kpi-value">¥8.2万</div></div>
+                                <div class="kpi-card"><div class="kpi-label">个税</div><div class="kpi-value">¥2.1万</div></div>
+                                <div class="kpi-card"><div class="kpi-label">实发总额</div><div class="kpi-value">¥48.3万</div></div>
+                            </div>
+                            
+                            <button class="btn btn-primary" onclick="sendSalarySlips()" style="margin-bottom: 16px;">📤 一键发放工资条</button>
+                            
+                            <table class="data-table" id="salaryTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('salaryTable', 0)">姓名 ↕</th>
+                                        <th>基本工资</th>
+                                        <th>绩效</th>
+                                        <th>补贴</th>
+                                        <th>社保扣除</th>
+                                        <th>个税</th>
+                                        <th>实发</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="salaryTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Tab4: 招聘管理 -->
+                        <div class="tab-content" id="hrRecruit">
+                            <table class="data-table" id="recruitTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('recruitTable', 0)">职位名称 ↕</th>
+                                        <th>部门</th>
+                                        <th>需求人数</th>
+                                        <th>已收简历</th>
+                                        <th>面试中</th>
+                                        <th>已录用</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recruitTableBody"></tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Tab5: 培训学习 -->
+                        <div class="tab-content" id="hrTraining">
+                            <table class="data-table" id="trainingTable">
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('trainingTable', 0)">课程名 ↕</th>
+                                        <th>类型</th>
+                                        <th>学时</th>
+                                        <th>完成率</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trainingTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
                 <div class="footer">© 2026 悟空AI | 广州泽亨实业有限公司专属Demo</div>
             </div>
         </main>
@@ -455,6 +578,24 @@
                 <button class="btn btn-danger" onclick="handleApproval('reject')">拒绝</button>
                 <button class="btn btn-success" onclick="handleApproval('approve')">同意</button>
             </div>
+        </div>
+    </div>
+    
+    <!-- 模态框：员工详情 -->
+    <div class="modal-overlay" id="employeeDetailModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">员工详情</span><span class="modal-close" onclick="closeModal('employeeDetailModal')">&times;</span></div>
+            <div class="modal-body" id="employeeDetailContent"></div>
+            <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('employeeDetailModal')">关闭</button></div>
+        </div>
+    </div>
+    
+    <!-- 模态框：简历查看 -->
+    <div class="modal-overlay" id="resumeModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">候选人简历</span><span class="modal-close" onclick="closeModal('resumeModal')">&times;</span></div>
+            <div class="modal-body" id="resumeContent"></div>
+            <div class="modal-footer"><button class="btn btn-default" onclick="closeModal('resumeModal')">关闭</button></div>
         </div>
     </div>
     
@@ -542,6 +683,70 @@
             { type: '设备采购', applicant: '生产部', amount: '¥45,000', status: '待审批', time: '2026-01-13 11:00', detail: '采购备用静电发生器模块3台，用于应急替换。' },
             { type: '人员招聘', applicant: '人力资源部', amount: '-', status: '待审批', time: '2026-01-12 15:30', detail: '招聘高级涂装工程师2名，月薪范围15-20K。' }
         ];
+        
+        // 智能人事数据
+        const rosterData = [
+            { id: 'ZH001', name: '张伟', dept: '研发部', position: '高级工程师', joinDate: '2020-03-15', status: '在职' },
+            { id: 'ZH002', name: '李娜', dept: '研发部', position: '软件工程师', joinDate: '2021-07-01', status: '在职' },
+            { id: 'ZH003', name: '王强', dept: '生产部', position: '生产主管', joinDate: '2019-05-20', status: '在职' },
+            { id: 'ZH004', name: '刘芳', dept: '销售部', position: '销售经理', joinDate: '2020-08-10', status: '在职' },
+            { id: 'ZH005', name: '陈明', dept: '售后部', position: '技术工程师', joinDate: '2021-11-05', status: '在职' },
+            { id: 'ZH006', name: '赵敏', dept: '行政部', position: '人事专员', joinDate: '2022-02-14', status: '在职' },
+            { id: 'ZH007', name: '孙磊', dept: '研发部', position: '电气工程师', joinDate: '2023-06-01', status: '试用期' },
+            { id: 'ZH008', name: '周婷', dept: '生产部', position: '质检员', joinDate: '2021-09-15', status: '在职' },
+            { id: 'ZH009', name: '吴刚', dept: '销售部', position: '销售代表', joinDate: '2022-04-20', status: '在职' },
+            { id: 'ZH010', name: '郑丽', dept: '售后部', position: '客服专员', joinDate: '2023-01-10', status: '在职' },
+            { id: 'ZH011', name: '黄勇', dept: '研发部', position: '机械工程师', joinDate: '2020-11-25', status: '在职' },
+            { id: 'ZH012', name: '林静', dept: '行政部', position: '行政助理', joinDate: '2022-08-01', status: '在职' },
+            { id: 'ZH013', name: '徐辉', dept: '生产部', position: '喷涂技师', joinDate: '2019-12-10', status: '在职' },
+            { id: 'ZH014', name: '朱琳', dept: '销售部', position: '大客户经理', joinDate: '2021-03-18', status: '在职' },
+            { id: 'ZH015', name: '马超', dept: '售后部', position: '维修工程师', joinDate: '2023-09-01', status: '试用期' },
+            { id: 'ZH016', name: '胡军', dept: '研发部', position: '项目工程师', joinDate: '2018-06-15', status: '在职' },
+            { id: 'ZH017', name: '郭燕', dept: '生产部', position: '班组长', joinDate: '2020-01-20', status: '离职' }
+        ];
+        
+        const attendanceData = [
+            { date: '2026-01-02', clockIn: '08:55', clockOut: '18:05', hours: '9.2', status: '正常' },
+            { date: '2026-01-05', clockIn: '09:05', clockOut: '18:10', hours: '9.1', status: '迟到' },
+            { date: '2026-01-06', clockIn: '08:50', clockOut: '18:00', hours: '9.2', status: '正常' },
+            { date: '2026-01-07', clockIn: '08:58', clockOut: '18:15', hours: '9.3', status: '正常' },
+            { date: '2026-01-08', clockIn: '09:10', clockOut: '18:05', hours: '8.9', status: '迟到' },
+            { date: '2026-01-09', clockIn: '08:52', clockOut: '18:00', hours: '9.1', status: '正常' },
+            { date: '2026-01-12', clockIn: '08:55', clockOut: '18:10', hours: '9.3', status: '正常' },
+            { date: '2026-01-13', clockIn: '09:15', clockOut: '18:00', hours: '8.8', status: '迟到' },
+            { date: '2026-01-14', clockIn: '08:50', clockOut: '18:05', hours: '9.3', status: '正常' },
+            { date: '2026-01-15', clockIn: '08:58', clockOut: '18:00', hours: '9.0', status: '正常' }
+        ];
+        
+        const salaryData = [
+            { name: '张伟', baseSalary: 15000, performance: 3000, allowance: 1500, socialSecurity: 2800, tax: 1200, actual: 15500 },
+            { name: '李娜', baseSalary: 12000, performance: 2500, allowance: 1200, socialSecurity: 2400, tax: 850, actual: 12450 },
+            { name: '王强', baseSalary: 13000, performance: 2800, allowance: 1300, socialSecurity: 2600, tax: 950, actual: 13550 },
+            { name: '刘芳', baseSalary: 14000, performance: 3500, allowance: 1400, socialSecurity: 2700, tax: 1100, actual: 15100 },
+            { name: '陈明', baseSalary: 11000, performance: 2200, allowance: 1100, socialSecurity: 2200, tax: 700, actual: 11400 },
+            { name: '赵敏', baseSalary: 9000, performance: 1800, allowance: 900, socialSecurity: 1800, tax: 450, actual: 9450 },
+            { name: '孙磊', baseSalary: 10000, performance: 2000, allowance: 1000, socialSecurity: 2000, tax: 550, actual: 10450 },
+            { name: '周婷', baseSalary: 8500, performance: 1700, allowance: 850, socialSecurity: 1700, tax: 400, actual: 8950 }
+        ];
+        
+        const recruitData = [
+            { position: '电气工程师', dept: '研发部', required: 2, resumes: 15, interviewing: 3, hired: 0, status: '招聘中' },
+            { position: '喷涂调试员', dept: '生产部', required: 3, resumes: 22, interviewing: 5, hired: 1, status: '招聘中' },
+            { position: '项目经理', dept: '研发部', required: 1, resumes: 8, interviewing: 2, hired: 0, status: '招聘中' },
+            { position: '售后技术员', dept: '售后部', required: 2, resumes: 18, interviewing: 4, hired: 1, status: '招聘中' },
+            { position: '软件工程师', dept: '研发部', required: 2, resumes: 25, interviewing: 6, hired: 0, status: '招聘中' }
+        ];
+        
+        const trainingData = [
+            { name: '涂装工艺基础', type: '技术培训', hours: 16, completion: 100, status: '已完成' },
+            { name: 'Zmart+系统操作', type: '系统培训', hours: 8, completion: 85, status: '进行中' },
+            { name: '安全生产', type: '安全培训', hours: 12, completion: 100, status: '已完成' },
+            { name: 'ISO9001内审', type: '质量培训', hours: 24, completion: 60, status: '进行中' },
+            { name: '机器人编程', type: '技术培训', hours: 20, completion: 45, status: '进行中' },
+            { name: '项目管理', type: '管理培训', hours: 16, completion: 75, status: '进行中' },
+            { name: 'PMP认证', type: '认证培训', hours: 40, completion: 30, status: '进行中' },
+            { name: 'AI工具应用', type: '技能培训', hours: 8, completion: 90, status: '进行中' }
+        ];
         // 导航切换
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -556,7 +761,7 @@
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.getElementById(`page-${page}`).classList.add('active');
             
-            const titles = { home: '统一门户首页', projects: '项目管理中心', tickets: '售后服务工单', inventory: '备件库存管理', knowledge: '知识库', dashboard: '经营看板', approval: '审批中心' };
+            const titles = { home: '统一门户首页', projects: '项目管理中心', tickets: '售后服务工单', inventory: '备件库存管理', knowledge: '知识库', dashboard: '经营看板', approval: '审批中心', hr: '智能人事' };
             document.getElementById('pageTitle').textContent = titles[page];
             
             if (page === 'projects') renderProjects();
@@ -565,6 +770,7 @@
             if (page === 'knowledge') renderKnowledge(knowledgeData);
             if (page === 'dashboard') renderCharts();
             if (page === 'approval') renderApproval();
+            if (page === 'hr') renderHR();
         }
         
         // Toast提示
@@ -1170,6 +1376,229 @@
             });
             
             rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        // 智能人事Tab切换
+        function switchHRTab(element, tabId) {
+            element.parentElement.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            
+            const parent = element.closest('.card');
+            parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+        }
+        
+        // 渲染智能人事页面
+        function renderHR() {
+            renderRoster();
+            renderAttendance();
+            renderSalary();
+            renderRecruit();
+            renderTraining();
+            renderAttendanceCalendar();
+        }
+        
+        // 渲染员工花名册
+        function renderRoster() {
+            const tbody = document.getElementById('rosterTableBody');
+            tbody.innerHTML = rosterData.map(emp => {
+                let statusClass = 'tag-success';
+                if (emp.status === '试用期') statusClass = 'tag-warning';
+                if (emp.status === '离职') statusClass = 'tag-danger';
+                
+                return `<tr>
+                    <td>${emp.id}</td>
+                    <td><a href="#" onclick="showEmployeeDetail('${emp.name}'); return false;" style="color: var(--primary); text-decoration: none;">${emp.name}</a></td>
+                    <td>${emp.dept}</td>
+                    <td>${emp.position}</td>
+                    <td>${emp.joinDate}</td>
+                    <td><span class="tag ${statusClass}">${emp.status}</span></td>
+                    <td><button class="btn btn-default btn-sm" onclick="showEmployeeDetail('${emp.name}')">详情</button></td>
+                </tr>`;
+            }).join('');
+        }
+        
+        // 显示员工详情
+        function showEmployeeDetail(name) {
+            const emp = rosterData.find(e => e.name === name);
+            if (!emp) return;
+            
+            const salaryInfo = salaryData.find(s => s.name === name);
+            
+            document.getElementById('employeeDetailContent').innerHTML = `
+                <h3 style="margin-bottom: 16px;">${emp.name} - ${emp.position}</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                    <div><strong>工号：</strong>${emp.id}</div>
+                    <div><strong>部门：</strong>${emp.dept}</div>
+                    <div><strong>入职日期：</strong>${emp.joinDate}</div>
+                    <div><strong>状态：</strong><span class="tag tag-success">${emp.status}</span></div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">合同信息</h4>
+                <div style="padding: 12px; background: var(--gray-1); border-radius: 4px; margin-bottom: 16px;">
+                    <div>合同类型：固定期限劳动合同</div>
+                    <div>合同期限：3年（${emp.joinDate} 至 ${new Date(new Date(emp.joinDate).setFullYear(new Date(emp.joinDate).getFullYear() + 3)).toISOString().split('T')[0]}）</div>
+                    <div>试用期：3个月</div>
+                </div>
+                
+                <h4 style="margin: 16px 0 10px;">薪资等级</h4>
+                <div style="padding: 12px; background: var(--gray-1); border-radius: 4px;">
+                    ${salaryInfo ? `
+                        <div>基本工资：¥${salaryInfo.baseSalary.toLocaleString()}</div>
+                        <div>绩效基数：¥${salaryInfo.performance.toLocaleString()}</div>
+                        <div>岗位补贴：¥${salaryInfo.allowance.toLocaleString()}</div>
+                        <div>薪资等级：P${Math.floor(salaryInfo.baseSalary / 3000)}</div>
+                    ` : '<div>暂无薪资数据</div>'}
+                </div>
+            `;
+            openModal('employeeDetailModal');
+        }
+        
+        // 渲染考勤日历
+        function renderAttendanceCalendar() {
+            const calendar = document.getElementById('attendanceCalendar');
+            const daysInMonth = 31;
+            const startDay = 4; // 2026-01-01是周四
+            
+            let html = '';
+            // 星期标题
+            ['日', '一', '二', '三', '四', '五', '六'].forEach(day => {
+                html += `<div style="text-align: center; padding: 8px; font-size: 12px; color: var(--gray-5); font-weight: 600;">${day}</div>`;
+            });
+            
+            // 空白填充
+            for (let i = 0; i < startDay; i++) {
+                html += '<div></div>';
+            }
+            
+            // 日期
+            const abnormalDays = [5, 8, 13]; // 迟到日期
+            const weekendDays = [3, 4, 10, 11, 17, 18, 24, 25, 31]; // 周末
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const isAbnormal = abnormalDays.includes(day);
+                const isWeekend = weekendDays.includes(day);
+                let bg = 'var(--gray-1)';
+                let color = 'var(--gray-7)';
+                
+                if (isAbnormal) {
+                    bg = '#fff2f0';
+                    color = 'var(--danger)';
+                } else if (isWeekend) {
+                    bg = 'var(--gray-2)';
+                    color = 'var(--gray-5)';
+                }
+                
+                html += `<div style="text-align: center; padding: 8px; background: ${bg}; color: ${color}; border-radius: 4px; font-size: 13px; cursor: pointer;">${day}</div>`;
+            }
+            
+            calendar.innerHTML = html;
+        }
+        
+        // 渲染考勤明细
+        function renderAttendance() {
+            const tbody = document.getElementById('attendanceTableBody');
+            tbody.innerHTML = attendanceData.map(att => {
+                let statusClass = 'tag-success';
+                if (att.status === '迟到') statusClass = 'tag-warning';
+                
+                return `<tr>
+                    <td>${att.date}</td>
+                    <td>${att.clockIn}</td>
+                    <td>${att.clockOut}</td>
+                    <td>${att.hours}小时</td>
+                    <td><span class="tag ${statusClass}">${att.status}</span></td>
+                </tr>`;
+            }).join('');
+        }
+        
+        // 渲染薪酬明细
+        function renderSalary() {
+            const tbody = document.getElementById('salaryTableBody');
+            tbody.innerHTML = salaryData.map(sal => `
+                <tr>
+                    <td>${sal.name}</td>
+                    <td>¥${sal.baseSalary.toLocaleString()}</td>
+                    <td>¥${sal.performance.toLocaleString()}</td>
+                    <td>¥${sal.allowance.toLocaleString()}</td>
+                    <td>¥${sal.socialSecurity.toLocaleString()}</td>
+                    <td>¥${sal.tax.toLocaleString()}</td>
+                    <td style="font-weight: 600; color: var(--success);">¥${sal.actual.toLocaleString()}</td>
+                </tr>
+            `).join('');
+        }
+        
+        // 发送工资条
+        function sendSalarySlips() {
+            showToast('已发送至全员钉钉');
+        }
+        
+        // 渲染招聘列表
+        function renderRecruit() {
+            const tbody = document.getElementById('recruitTableBody');
+            tbody.innerHTML = recruitData.map(rec => `
+                <tr>
+                    <td>${rec.position}</td>
+                    <td>${rec.dept}</td>
+                    <td>${rec.required}人</td>
+                    <td>${rec.resumes}份</td>
+                    <td>${rec.interviewing}人</td>
+                    <td>${rec.hired}人</td>
+                    <td><span class="tag tag-primary">${rec.status}</span></td>
+                    <td><button class="btn btn-default btn-sm" onclick="showResume('${rec.position}')">查看简历</button></td>
+                </tr>
+            `).join('');
+        }
+        
+        // 显示简历
+        function showResume(position) {
+            document.getElementById('resumeContent').innerHTML = `
+                <h3 style="margin-bottom: 16px;">${position} - 候选人简历</h3>
+                <div style="padding: 16px; background: var(--gray-1); border-radius: 4px; margin-bottom: 16px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                        <div><strong>姓名：</strong>李明</div>
+                        <div><strong>年龄：</strong>28岁</div>
+                        <div><strong>学历：</strong>本科</div>
+                        <div><strong>专业：</strong>电气工程及其自动化</div>
+                        <div><strong>工作年限：</strong>5年</div>
+                        <div><strong>期望薪资：</strong>15-18K</div>
+                    </div>
+                    <h4 style="margin: 12px 0 8px;">工作经历</h4>
+                    <div style="margin-bottom: 8px;">
+                        <strong>2021.03 - 至今 | 某涂装设备公司 | 电气工程师</strong><br>
+                        负责涂装生产线电气系统设计、调试和维护，熟悉PLC编程和工业机器人控制。
+                    </div>
+                    <div>
+                        <strong>2019.07 - 2021.02 | 某自动化公司 | 助理工程师</strong><br>
+                        参与自动化产线电气改造项目，协助完成控制系统设计。
+                    </div>
+                    <h4 style="margin: 12px 0 8px;">专业技能</h4>
+                    <div>熟练掌握西门子S7-1200/1500 PLC编程，熟悉ABB/FANUC机器人示教，具备涂装工艺基础知识。</div>
+                </div>
+            `;
+            openModal('resumeModal');
+        }
+        
+        // 渲染培训列表
+        function renderTraining() {
+            const tbody = document.getElementById('trainingTableBody');
+            tbody.innerHTML = trainingData.map(train => {
+                let statusClass = 'tag-primary';
+                if (train.status === '已完成') statusClass = 'tag-success';
+                
+                return `<tr>
+                    <td>${train.name}</td>
+                    <td>${train.type}</td>
+                    <td>${train.hours}学时</td>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div class="progress-bar" style="flex: 1;"><div class="progress-fill" style="width: ${train.completion}%"></div></div>
+                            <span style="font-size: 12px; min-width: 40px;">${train.completion}%</span>
+                        </div>
+                    </td>
+                    <td><span class="tag ${statusClass}">${train.status}</span></td>
+                </tr>`;
+            }).join('');
         }
         
         // 初始化
